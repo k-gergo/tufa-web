@@ -1,0 +1,50 @@
+{% load static %}
+<nav class="main-nav">
+    <div class="container nav-container">
+        <button class="mobile-nav-toggle" aria-label="Menü megnyitása/bezárása">☰</button>
+        <ul class="nav-list">
+            <li class="nav-item active">
+                <a href="/" class="nav-link" data-lang-hu="Főoldal" data-lang-sk="Domov">Főoldal</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'xcmg:xcmg_list' %}" class="nav-link" data-lang-hu="XCMG" data-lang-sk="XCMG">XCMG</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" data-lang-hu="Termékek" data-lang-sk="Produkty">Gépek</a>
+                <ul class="dropdown">
+                    <li class="dropdown-item">
+                        <a href="{% url 'forestry:forestry_list' %}" class="dropdown-link" data-lang-hu="Erdészeti gépek" data-lang-sk="Lesnícke stroje">Erdészeti gépek</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="{% url 'mezogazdasag:mezogazdasag_list' %}" class="dropdown-link" data-lang-hu="Mezőgazdasági gépek" data-lang-sk="Poľnohospodárske stroje">Mezőgazdasági gépek</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="{% url 'epiteszet:epiteszet_list' %}" class="dropdown-link" data-lang-hu="Gépek, építőipari kiegészítők" data-lang-sk="Stroje, stavebné príslušenstvo">Gépek, építőipari kiegészítők</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="{% url 'rampak:rampak_list' %}" class="dropdown-link" data-lang-hu="Rámpák" data-lang-sk="Rámpy">Rámpák</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'hasznalt:hasznalt_list' %}" class="nav-link" data-lang-hu="Használt gépek" data-lang-sk="Použité stroje">Használt gépek</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'gallery:gallery_list' %}" class="nav-link" data-lang-hu="Galéria" data-lang-sk="Galéria">Galéria</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'blog:blog_list' %}" class="nav-link" data-lang-hu="Blog" data-lang-sk="Blog">Blog</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'contact:contact_page' %}" class="nav-link" data-lang-hu="Kapcsolat" data-lang-sk="Kontakt">Kapcsolat</a>
+            </li>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i>✉️</i> 
+                    <span data-lang-hu="info@tufa.hu" data-lang-sk="info@tufa.sk">info@tufa.hu</span>
+                </div>
+            </div>
+        </ul>
+    </div>
+    <div class="warning-stripe"></div>
+</nav>

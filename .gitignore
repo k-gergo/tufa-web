@@ -1,0 +1,19 @@
+# Django-specific
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+*.sqlite3
+*.log
+migrations/
+*.env
+
+# Other common ignores
+.DS_Store
+*.swp
+*.bak
+*.tmp
+*.temp

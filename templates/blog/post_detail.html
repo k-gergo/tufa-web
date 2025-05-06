@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load blog_tags %} {# Betöltjük a markdown_format és embed_videos filtereket #}
+
+{# === CÍM === #}
+{% block title %}
+    {% if LANGUAGE_CODE == 'sk' %}
+        {{ post.title_sk|default:post.title_hu }} - TUFA MACHINE Blog
+    {% else %}
+        {{ post.title_hu }} - TUFA MACHINE Blog
+    {% endif %}
+{% endblock %}
+
+{# === CSS === #}
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
+{# Itt lehetnek a korábbi CSS stílusaid, vagy hivatkozhatsz a blog.css-re, ha abban vannak #}
+<link rel="stylesheet" href="{% static 'css/blog.css' %}"> {# Feltéve, hogy van blog.css #}
+<style>
+    /* Ide jöhetnek további, csak erre az oldalra vonatkozó stílusok, ha kellenek */
+    .blog-content-wrap img { /* Biztosítjuk, hogy a tartalom képei reszponzívak legyenek */
+        max-width: 100%;
+        height: auto;
+        display: block; /* Megszünteti az extra helyet a kép alatt */
+        margin: 1.5rem 0; /* Térköz */
+        border-radius: 8px; /* Lekerekítés */
+        box-shadow: var(--shadow); /* Árnyék */
+    }
+    /* Fancybox caption stílusai (ha kellenek) */
+    .fancybox-caption {
+        text-align: center;
+    }
+</style>
+{% endblock %}
+
+{# === FŐ TARTALOM === #}
+{% block content %}
+
+    {# --- HERO SZEKCIÓ --- #}
+    <section class="hero-banner blog-hero">
+    {% if not post.featured_image %}
+        {# Alapértelmezett banner, ha nincs kép #}
+        <img src="{% static 'images/blog/blog_hero.jpg' %}" alt="{% if LANGUAGE_CODE == 'sk' %}{{ post.title_sk|default:post.title_hu }}{% else %}{{ post.title_hu }}{% endif %}" class="hero-image">
+    {% endif %}
+    <div class="hero-text">
+            {# Cím a kiválasztott nyelven, magyar a tartalék #}
+            <h1>{% if LANGUAGE_CODE == 'sk' %}{{ post.title_sk|default:post.title_hu }}{% else %}{{ post.title_hu }}{% endif %}</h1>
+            <p class="post-meta">
+                <span class="post-date">{{ post.published|date:"Y. F j." }}</span>
+                {# Kategória megjelenítése, ha van #}
+                {% if post.category %}
+                    <span class="post-category">
+                        | {% if LANGUAGE_CODE == 'sk' %}{{ post.category.name_sk|default:post.category.name_hu }}{% else %}{{ post.category.name_hu }}{% endif %}
+                    </span>
+                {% endif %}
+            </p>
+        </div>
+    </section>
+
+    {# --- CIKK TARTALMA SZEKCIÓ --- #}
+    <section class="blog-single-section">
+        <div class="container">
+            <article class="blog-single">
+
+                {# --- KIEMELT VIDEÓ (EGYSZERŰSÍTVE) --- #}
+                {% if post.video_url %}
+                    <div class="blog-featured-video">
+                        <div class="video-container">
+                            {# Most már csak az embed_videos filtert használjuk #}
+                            {{ post.video_url|embed_videos|safe }}
+                        </div>
+                    </div>
+                {% endif %}
+
+                {# --- FŐ SZÖVEGTÖRZS --- #}
+                <div class="blog-content-wrap">
+                    {# Megjelenítjük a megfelelő nyelvű tartalmat, markdown + videó filterrel #}
+                    {% if LANGUAGE_CODE == 'sk' %}
+                        {{ post.content_sk|default:post.content_hu|markdown_format|embed_videos|safe }}
+                    {% else %}
+                        {{ post.content_hu|markdown_format|embed_videos|safe }}
+                    {% endif %}
+                </div>
+
+                {# --- KÉPGALÉRIA (Feltéve, hogy a PostGalleryImage modellel működik) --- #}
+                {% with gallery=post.gallery_images.all %} {# Hatékonyabb, ha változóba tesszük #}
+                    {% if gallery %}
+                        <div class="blog-gallery">
+                            <h3>{% if LANGUAGE_CODE == 'sk' %}Galéria obrázkov{% else %}Képgaléria{% endif %}</h3>
+                            <div class="blog-gallery-grid">
+                                {% for gallery_image_relation in gallery %} {# Változónév egyértelműsítése #}
+
+                                    {% with img=gallery_image_relation %} {# Egyszerűsítés, ha a ciklusváltozó már a kép objektum #}
+                                        <div class="gallery-item">
+                                            <a href="{{ img.image.url }}" class="gallery-link" data-fancybox="gallery"
+                                               data-caption="{% if LANGUAGE_CODE == 'sk' %}{{ img.caption_sk|default:img.caption_hu|default:'' }}{% else %}{{ img.caption_hu|default:'' }}{% endif %}"> {# Feltételezve caption mezőket a PostGalleryImage modellen #}
+                                                <img src="{{ img.image.url }}"
+                                                     alt="{% if LANGUAGE_CODE == 'sk' %}{{ img.caption_sk|default:img.caption_hu|default:'Galéria kép' }}{% else %}{{ img.caption_hu|default:'Galéria kép' }}{% endif %}" class="gallery-img">
+                                                {# Opcionális: Caption megjelenítése a képen (CSS kezeli) #}
+                                                {% comment %}
+                                                <div class="gallery-caption">
+                                                    <h4>{% if LANGUAGE_CODE == 'sk' %}{{ img.caption_sk|default:img.caption_hu }}{% else %}{{ img.caption_hu }}{% endif %}</h4>
+                                                </div>
+                                                {% endcomment %}
+                                            </a>
+                                        </div>
+                                    {% endwith %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endwith %}
+
+            </article>
+
+            {# --- NAVIGÁCIÓ VISSZA --- #}
+            <div class="post-navigation">
+                <a href="{% url 'blog:blog_list' %}" class="back-to-blog">
+                    {% if LANGUAGE_CODE == 'sk' %}← Späť na blog{% else %}← Vissza a bloghoz{% endif %}
+                </a>
+            </div>
+        </div>
+    </section>
+
+    {# --- KAPCSOLÓDÓ BEJEGYZÉSEK --- #}
+    {% if recent_posts %}
+    <section class="related-posts-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>{% if LANGUAGE_CODE == 'sk' %}Ďalšie príspevky na blogu{% else %}További blogbejegyzések{% endif %}</h2>
+            </div>
+            <div class="blog-grid">
+                {# Itt most nem másolom be újra a teljes blog kártya kódot,
+                   de ugyanazt a logikát kellene használni, mint a blog_list.html-ben,
+                   kivéve a videó thumbnail részt, amit szintén egyszerűsíthetnél
+                   a placeholderre, mint a blog_list-ben tettük.
+                   Fontos, hogy a nyelvi if/else itt is egyszerűsödjön.
+                #}
+                {% for recent_post in recent_posts %}
+                    {% include 'blog/partials/blog_card.html' with post=recent_post %}
+                {% endfor %}
+                {# Fenti sor helyett bemásolhatod a blog_list.html kártya kódját,
+                   egyszerűsítve a nyelvkezelést és a videót, ahogy itt fentebb tettük.
+                   A `partials/blog_card.html` használata a "DRY" (Don't Repeat Yourself) elvet követi.
+                #}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    {# --- CTA SZEKCIÓ --- #}
+    <section class="cta-section">
+        <div class="container">
+             <h2 class="cta-title">{% if LANGUAGE_CODE == 'sk' %}Máte otázky?{% else %}Kérdései vannak?{% endif %}</h2>
+            <p class="cta-text">
+               {% if LANGUAGE_CODE == 'sk' %}
+                   Kontaktujte nás! Náš odborný tím je vám k dispozícii, aby našiel riešenie, ktoré vám najviac vyhovuje.
+               {% else %}
+                   Vegye fel velünk a kapcsolatot! Szakértő csapatunk készséggel áll rendelkezésére, hogy megtalálja az Önnek legmegfelelőbb megoldást.
+               {% endif %}
+            </p>
+            {# Ellenőrizd, hogy a 'contact' URL név létezik-e a fő urls.py-ban #}
+            <a href="/kapcsolat/" class="btn btn-light">
+                {% if LANGUAGE_CODE == 'sk' %}Kontaktujte nás{% else %}Kapcsolatfelvétel{% endif %}
+            </a>
+        </div>
+    </section>
+{% endblock %}
+
+{# === JAVASCRIPT === #}
+{% block extra_js %}
+{# Fancybox JS marad #}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Fancybox inicializálása a galéria linkekre
+        $('[data-fancybox="gallery"]').fancybox({
+            buttons: [ "zoom", "slideShow", "fullScreen", "thumbs", "close" ],
+            animationEffect: "fade",
+            transitionEffect: "fade",
+            loop: true,
+            infobar: true,
+        });
+    });
+</script>
+{% endblock %}

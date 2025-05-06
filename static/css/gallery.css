@@ -1,0 +1,115 @@
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    padding: 1rem 0;
+}
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.09);
+    background: #fff;
+    transition: transform 0.2s;
+}
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 1/1;
+    transition: transform 0.3s;
+}
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+.caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    padding: 0.4rem;
+    font-size: 0.95rem;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+.gallery-item:hover .caption {
+    opacity: 1;
+}
+
+/* Modal styles */
+.gallery-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0; top: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.92);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.gallery-modal.active {
+    display: flex;
+}
+.modal-content {
+    max-width: 90vw;
+    max-height: 80vh;
+    border-radius: 8px;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.7);
+    background: #fff;
+}
+.modal-caption {
+    color: #fff;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    text-align: center;
+    max-width: 90vw;
+    word-break: break-word;
+}
+.modal-close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    color: #fff;
+    font-size: 2.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    z-index: 10000;
+    transition: color 0.2s;
+}
+.modal-close:hover {
+    color: #ffb0b0;
+}
+.modal-arrow {
+    position: absolute;
+    top: 50%;
+    color: #fff;
+    font-size: 2.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    background: rgba(0,0,0,0.2);
+    border-radius: 50%;
+    padding: 0.3em 0.7em;
+    user-select: none;
+    z-index: 10001;
+    transition: background 0.2s, color 0.2s;
+}
+.modal-prev { left: 2rem; transform: translateY(-50%); }
+.modal-next { right: 2rem; transform: translateY(-50%); }
+.modal-arrow:hover {
+    background: rgba(255,255,255,0.2);
+    color: #ffb0b0;
+}
+@media (max-width: 600px) {
+    .modal-content { max-width: 98vw; max-height: 60vh; }
+    .modal-caption { font-size: 1rem; }
+    .modal-prev { left: 0.5rem; }
+    .modal-next { right: 0.5rem; }
+}

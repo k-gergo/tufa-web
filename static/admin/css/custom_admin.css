@@ -1,0 +1,17 @@
+/* static/admin/css/custom_admin.css */
+#header {
+    background-color: #336699;  /* Kék szín, de bármit választhatsz */
+    color: white;
+}
+
+.module h2, .module caption, .inline-group h2 {
+    background-color: #4477AA;
+}
+
+.button.default, input[type=submit].default, .submit-row input.default {
+    background: #336699;
+}
+
+div.breadcrumbs {
+    background: #4477AA;
+}

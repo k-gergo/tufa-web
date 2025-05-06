@@ -1,0 +1,250 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}TUFA MACHINE - Főoldal{% endblock %}
+
+{% block content %}
+     {% comment %} Tartalom az index.html sablonhoz {% endcomment %}
+
+    <section class="hero">
+        <img src="{% static 'images/index/Excavator.jpg' %}" alt="Építőipari gépek" class="hero-bg">
+        <div class="container">
+            <div class="hero-content">
+                <h1 data-lang-hu="ÉPÍTŐIPARI, ERDÉSZETI ÉS MEZŐGAZDASÁGI GÉPEK"
+                    data-lang-sk="STAVEBNÉ, LESNÉ A POĽNOHOSPODÁRSKE STROJE">
+                    ÉPÍTŐIPARI, ERDÉSZETI ÉS MEZŐGAZDASÁGI GÉPEK
+                </h1>
+                <p data-lang-hu="Cégünk immár 15 éve áll ügyfelei szolgálatában az építőiparban használatos új és használt gépek, berendezések és kiegészítők forgalmazásában."
+                   data-lang-sk="Naša spoločnosť už 15 rokov slúži svojim zákazníkom v oblasti predaja nových a použitých strojov, zariadení a príslušenstva používaných v stavebníctve.">
+                   Cégünk immár 15 éve áll ügyfelei szolgálatában az építőiparban használatos új és használt gépek, berendezések és kiegészítők forgalmazásában.
+                </p>
+                <a href="/kapcsolat/" class="btn" data-lang-hu="Kapcsolatfelvétel" data-lang-sk="Kontaktujte nás">Kapcsolatfelvétel</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section">
+        <div class="container">
+            <div class="about-container">
+                <div class="about-content">
+                    <h2 class="about-title" data-lang-hu="Üdvözöljük a TUFA MACHINE oldalán!" data-lang-sk="Vitajte na stránke TUFA MACHINE!">Üdvözöljük a TUFA MACHINE oldalán!</h2>
+
+                    <p class="about-text"
+                       data-lang-hu='Cégünk immár <span class="highlight">15 éve</span> áll ügyfeleink szolgálatában az építőiparban, erdészetben és mezőgazdaságban használatos új és használt gépek, berendezések, valamint különböző munkagépekhez és traktorokhoz való kiegészítők forgalmazásával.'
+                       data-lang-sk='Naša spoločnosť už <span class="highlight">15 rokov</span> slúži našim zákazníkom v oblasti predaja nových a použitých strojov, zariadení a príslušenstva pre stavebníctvo, lesníctvo a poľnohospodárstvo.'>
+                       Cégünk immár <span class="highlight">15 éve</span> áll ügyfeleink szolgálatában az építőiparban, erdészetben és mezőgazdaságban használatos új és használt gépek, berendezések, valamint különböző munkagépekhez és traktorokhoz való kiegészítők forgalmazásával.
+                    </p>
+
+                    <p class="about-text"
+                       data-lang-hu='Magyarországi telephelyünk <span class="highlight">Veszprém megyében, Úrkúton</span> található, Ajkától mindössze 10 km-re. Hatalmas raktárkészlettel és gyors beszerzéssel várjuk vásárlóinkat, továbbá hivatalos viszonteladóként forgalmazzuk az <span class="highlight">XCMG gépeket</span> is.'
+                       data-lang-sk='Naša maďarská pobočka sa nachádza v <span class="highlight">Úrkúte, vo Vesprémskej župe</span>, len 10 km od Ajky. Očakávame našich zákazníkov s obrovskými skladovými zásobami a rýchlym nákupom, a sme tiež oficiálnym predajcom strojov <span class="highlight">XCMG</span>.'>
+                       Magyarországi telephelyünk <span class="highlight">Veszprém megyében, Úrkúton</span> található, Ajkától mindössze 10 km-re. Hatalmas raktárkészlettel és gyors beszerzéssel várjuk vásárlóinkat, továbbá hivatalos viszonteladóként forgalmazzuk az <span class="highlight">XCMG gépeket</span> is.
+                    </p>
+                </div>
+                <div class="about-image">
+                    <img src="{% static 'images/index/tm_logo_sz.jpg' %}" alt="TUFA MACHINE telephely">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="machine-categories">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-lang-hu="Gépkategóriák" data-lang-sk="Kategórie strojov">Gépkategóriák</h2>
+            </div>
+
+            <div class="category-grid">
+                <div class="category-card">
+                    <img src="{% static 'images/index/erdeszeti_gepek.jpg' %}" alt="Erdészeti gépek" class="category-img">
+                    <div class="category-overlay">
+                        <h3 class="category-title" data-lang-hu="Erdészeti gépek" data-lang-sk="Lesné stroje">Erdészeti gépek</h3>
+                        <p data-lang-hu="Speciális erdészeti és faipari munkagépek, aprítók, darálók, zúzók, szárzúzók és más erdészeti megoldások."
+                           data-lang-sk="Špeciálne lesnícke a drevárske stroje, štiepkovače, drviče, mulčovače a iné lesnícke riešenia.">
+                           Speciális erdészeti és faipari munkagépek, aprítók, darálók, zúzók, szárzúzók és más erdészeti megoldások.
+                        </p>
+                        <a href="/erdeszeti-gepek/" class="category-link" data-lang-hu="Részletek &rarr;" data-lang-sk="Podrobnosti &rarr;">Részletek &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="category-card">
+                    <img src="{% static 'images/index/mezogazd_gepek.jpg' %}" alt="Mezőgazdasági gépek" class="category-img">
+                    <div class="category-overlay">
+                        <h3 class="category-title" data-lang-hu="Mezőgazdasági gépek" data-lang-sk="Poľnohospodárske stroje">Mezőgazdasági gépek</h3>
+                        <p data-lang-hu="Modern mezőgazdasági gépek és adapterek, traktorok, talajművelők, betakarítógépek és más tartozékok."
+                           data-lang-sk="Moderné poľnohospodárske stroje a adaptéry, traktory, kultivátory, zberacie stroje a iné príslušenstvo.">
+                           Modern mezőgazdasági gépek és adapterek, traktorok, talajművelők, betakarítógépek és más tartozékok.
+                        </p>
+                        <a href="/mezogazdasagi-gepek/" class="category-link" data-lang-hu="Részletek &rarr;" data-lang-sk="Podrobnosti &rarr;">Részletek &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="category-card">
+                    <img src="{% static 'images/index/epitoipari_gepek.jpg' %}" alt="Építőipari gépek" class="category-img">
+                    <div class="category-overlay">
+                        <h3 class="category-title" data-lang-hu="Építőipari gépek" data-lang-sk="Stavebné stroje">Építőipari gépek</h3>
+                        <p data-lang-hu="Professzionális építőipari munkagépek, kanalak, bontókalapácsok, markolók, rakodók és más eszközök."
+                           data-lang-sk="Profesionálne stavebné stroje, lyžice, búracie kladivá, rýpadlá, nakladače a iné zariadenia.">
+                           Professzionális építőipari munkagépek, kanalak, bontókalapácsok, markolók, rakodók és más eszközök.
+                        </p>
+                        <a href="/epitoipari-gepek/" class="category-link" data-lang-hu="Részletek &rarr;" data-lang-sk="Podrobnosti &rarr;">Részletek &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="xcmg-showcase">
+        <div class="xcmg-bg"></div>
+        <div class="container xcmg-container">
+            <div class="xcmg-header">
+                <img src="{% static 'images/index/xcmg1.png' %}" alt="XCMG Logo" class="xcmg-logo">
+                <div class="xcmg-intro">
+                    <h3 data-lang-hu="Az XCMG hivatalos magyarországi forgalmazója"
+                        data-lang-sk="Oficiálny distribútor XCMG v Maďarsku">
+                        Az XCMG hivatalos magyarországi forgalmazója
+                    </h3>
+                    <p data-lang-hu="Cégünk hivatalosan is az új XCMG munkagépek hivatalos viszonteladói partnerévé vált Magyarországon és Szlovákiában is. Válogasson az XCMG munkagépek széleskörű kínálatából!"
+                       data-lang-sk="Naša spoločnosť sa oficiálne stala partnerom predaja nových strojov XCMG v Maďarsku a na Slovensku. Vyberte si zo širokej ponuky strojov XCMG!">
+                       Cégünk hivatalosan is az új XCMG munkagépek hivatalos viszonteladói partnerévé vált Magyarországon és Szlovákiában is. Válogasson az XCMG munkagépek széleskörű kínálatából!
+                    </p>
+                </div>
+            </div>
+
+            <div class="products-grid">
+                <div class="product-card">
+                     <div class="product-img-container">
+                         <img src="{% static 'images/index/gep1.jpg' %}" alt="XCMG XE20E" class="product-img">
+                     </div>
+                     <div class="product-content">
+                         <h3 class="product-title" data-lang-hu="XCMG XE20E Mini Kotrógép" data-lang-sk="XCMG XE20E Mini Rýpadlo">XCMG XE20E Mini Kotrógép</h3>
+                         <p class="product-desc" data-lang-hu="Egy kompakt és sokoldalú minikotró, amely kiváló választás szűk helyeken végzett munkákhoz." data-lang-sk="Kompaktné a univerzálne mini rýpadlo, ktoré je vynikajúcou voľbou pre prácu v úzkych priestoroch.">Egy kompakt és sokoldalú minikotró, amely kiváló választás szűk helyeken végzett munkákhoz.</p>
+                         <div class="product-cta">
+                             <span class="product-price" data-lang-hu="Érdeklődjön!" data-lang-sk="Informujte sa!">Érdeklődjön!</span>
+                             <a href="/xcmg-gepek/gep/2" class="btn btn-sm" data-lang-hu="Részletek" data-lang-sk="Podrobnosti">Részletek</a>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="product-card">
+                      <div class="product-img-container">
+                          <img src="{% static 'images/index/gep2.jpg' %}" alt="XCMG XE27E" class="product-img">
+                      </div>
+                      <div class="product-content">
+                          <h3 class="product-title" data-lang-hu="XCMG XE27E Mini Kotrógép" data-lang-sk="XCMG XE27E Mini Rýpadlo">XCMG XE27E Mini Kotrógép</h3>
+                          <p class="product-desc" data-lang-hu="Megbízható teljesítményével és alacsony üzemanyag fogyasztásával ideális eszköz építőipari, tereprendezési, bontási és mezőgazdasági feladatokhoz." data-lang-sk="So spoľahlivým výkonom a nízkou spotrebou paliva je ideálnym nástrojom pre stavebné, terénne úpravy, demolačné a poľnohospodárske úlohy.">Megbízható teljesítményével és alacsony üzemanyag fogyasztásával ideális eszköz építőipari, tereprendezési, bontási és mezőgazdasági feladatokhoz.</p>
+                          <div class="product-cta">
+                              <span class="product-price" data-lang-hu="Érdeklődjön!" data-lang-sk="Informujte sa!">Érdeklődjön!</span>
+                              <a href="/xcmg-gepek/gep/3" class="btn btn-sm" data-lang-hu="Részletek" data-lang-sk="Podrobnosti">Részletek</a>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="product-card">
+                       <div class="product-img-container">
+                           <img src="{% static 'images/index/gep3.jpg' %}" alt="XCMG XC7-SR08 Skid Loader" class="product-img">
+                       </div>
+                       <div class="product-content">
+                           <h3 class="product-title" data-lang-hu="XCMG XC7-SR08 Skid Loader" data-lang-sk="XCMG XC7-SR08 Šmykom riadený nakladač">XCMG XC7-SR08 Skid Loader</h3>
+                           <p class="product-desc" data-lang-hu="Ideális választás az építőipar, mezőgazdaság, közművesítés vagy akár tereprendezési feladatok elvégzéséhez." data-lang-sk="Ideálna voľba pre stavebníctvo, poľnohospodárstvo, verejné služby alebo dokonca terénne úpravy.">Ideális választás az építőipar, mezőgazdaság, közművesítés vagy akár tereprendezési feladatok elvégzéséhez.</p>
+                           <div class="product-cta">
+                               <span class="product-price" data-lang-hu="Érdeklődjön!" data-lang-sk="Informujte sa!">Érdeklődjön!</span>
+                               <a href="/xcmg-gepek/gep/3" class="btn btn-sm" data-lang-hu="Részletek" data-lang-sk="Podrobnosti">Részletek</a>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="{% static 'images/index/gep4.jpg' %}" alt="XCMG XC7-TV12 Kompakt rakodó" class="product-img">
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title" data-lang-hu="XCMG XC7-TV12 Kompakt rakodó" data-lang-sk="XCMG XC7-TV12 Kompaktný nakladač">XCMG XC7-TV12 Kompakt rakodó</h3>
+                            <p class="product-desc" data-lang-hu="Sokoldalú és kompakt munkagépek csúcsa, amely nemcsak hatékonyságával, hanem megbízhatóságával is kiemelkedik." data-lang-sk="Vrchol univerzálnych a kompaktných strojov, ktorý vyniká nielen svojou účinnosťou, ale aj spoľahlivosťou.">Sokoldalú és kompakt munkagépek csúcsa, amely nemcsak hatékonyságával, hanem megbízhatóságával is kiemelkedik.</p>
+                            <div class="product-cta">
+                                <span class="product-price" data-lang-hu="Érdeklődjön!" data-lang-sk="Informujte sa!">Érdeklődjön!</span>
+                                <a href="/xcmg-gepek/gep/4" class="btn btn-sm" data-lang-hu="Részletek" data-lang-sk="Podrobnosti">Részletek</a>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="/xcmg-gepek/" class="btn" data-lang-hu="Összes XCMG gép" data-lang-sk="Všetky stroje XCMG">Összes XCMG gép</a>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <section class="partners-section">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-lang-hu="Partnereink és képviselt márkák" data-lang-sk="Naši partneri a zastúpené značky">Partnereink és képviselt márkák</h2>
+            </div>
+
+            <div class="partners-grid">
+                <a href="https://en.xcmg.com/en-ap/" target="_blank">
+                    <img src="{% static 'images/index/xcmg2.png' %}" alt="XCMG" class="partner-logo">
+                </a>
+                <a href="https://idrobenne.com" target="_blank">
+                    <img src="{% static 'images/index/Idrobenne-Logo.jpg' %}" alt="Idrobenne" class="partner-logo">
+                </a>
+                <a href="https://ghedini.com" target="_blank">
+                    <img src="{% static 'images/index/ghedini_a_logo.png' %}" alt="Ghedini" class="partner-logo">
+                </a>
+                <a href="https://www.simap.it/" target="_blank">
+                    <img src="{% static 'images/index/sima logo.jpg' %}" alt="SIMA" class="partner-logo">
+                </a>
+                <a href="https://www.ramtec.it" target="_blank">
+                    <img src="{% static 'images/index/idro_logo.png' %}" alt="IDROMECCANICA" class="partner-logo">
+                </a>
+            </div>
+            <div class="partners-grid">
+                <a href="https://www.ambrosibenne.it" target="_blank">
+                    <img src="{% static 'images/index/ambrosibenne_logo.jpg' %}" alt="Ambrosi Benne" class="partner-logo">
+                </a>
+                <a href="https://www.zamo.it" target="_blank">
+                    <img src="{% static 'images/index/zamo_logo.jpg' %}" alt="Zamo" class="partner-logo">
+                </a>
+                <a href="https://www.panexagm.com" target="_blank">
+                    <img src="{% static 'images/index/panex_logo.jpg' %}" alt="Panex AGM" class="partner-logo">
+                </a>
+                <a href="https://www.grent.it" target="_blank">
+                    <img src="{% static 'images/index/grent_logo.jpg' %}" alt="Grent" class="partner-logo">
+                </a>
+                <a href="https://www.metalmecsrl.it" target="_blank">
+                    <img src="{% static 'images/index/metalmec_logo.png' %}" alt="Metalmec" class="partner-logo">
+                </a>
+            </div>
+            <div class="partners-grid">
+                <a href="https://www.cmcrushermachines.com/en/" target="_blank">
+                    <img src="{% static 'images/index/cm_logo.jpg' %}" alt="CM" class="partner-logo">
+                </a>
+                <a href="https://minitop.it/" target="_blank">
+                    <img src="{% static 'images/index/minitop_logo.png' %}" alt="Minitop" class="partner-logo">
+                </a>
+                <a href="https://www.peruzzo.it/" target="_blank">
+                    <img src="{% static 'images/index/peruzzo_logo.png' %}" alt="Peruzzo" class="partner-logo">
+                </a>
+                <a href="https://omefgroup.com/en/" target="_blank">
+                    <img src="{% static 'images/index/omef.jpg' %}" alt="Peruzzo" class="partner-logo">
+                </a>
+                <a href="https://www.cea-agriforest.com/ENG/azienda" target="_blank">
+                    <img src="{% static 'images/index/agriforest.jpg' %}" alt="Peruzzo" class="partner-logo">
+                </a>
+            </div>
+            
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title" data-lang-hu="Kérdései vannak?" data-lang-sk="Máte otázky?">Kérdései vannak?</h2>
+            <p class="cta-text"
+               data-lang-hu="Vegye fel velünk a kapcsolatot! Szakértő csapatunk készséggel áll rendelkezésére, hogy megtalálja az Önnek legmegfelelőbb megoldást."
+               data-lang-sk="Kontaktujte nás! Náš odborný tím je vám k dispozícii, aby našiel riešenie, ktoré vám najviac vyhovuje.">
+               Vegye fel velünk a kapcsolatot! Szakértő csapatunk készséggel áll rendelkezésére, hogy megtalálja az Önnek legmegfelelőbb megoldást.
+            </p>
+            <a href="/kapcsolat/" class="btn btn-light" data-lang-hu="Kapcsolatfelvétel" data-lang-sk="Kontaktujte nás">Kapcsolatfelvétel</a>
+        </div>
+    </section>
+
+{% endblock %}

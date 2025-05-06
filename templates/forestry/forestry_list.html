@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if LANGUAGE_CODE == 'sk' %}
+        Lesné Stroje - TUFA MACHINE
+    {% else %}
+        Erdészeti Munkagépek - TUFA MACHINE
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<section class="xcmg-products-page" style="padding: 4rem 0;">
+    <div class="container">
+
+
+        
+        <section class="hero-banner forestry-hero mb-4">
+            <img src="{% static 'images/forestry.jpg' %}" alt="{% if LANGUAGE_CODE == 'sk' %}Lesné stroje{% else %}Erdészeti gépek{% endif %}" class="hero-image">
+            <div class="hero-text">
+                <h1 data-lang-hu="Erdészeti Gépek Széles Választéka" data-lang-sk="Široký Výber Lesných Strojov">
+                    {% if LANGUAGE_CODE == 'sk' %}
+                        Široký Výber Lesných Strojov
+                    {% else %}
+                        Erdészeti Gépek Széles Választéka
+                    {% endif %}
+                </h1>
+               
+                </p>
+            </div>
+        </section>
+        
+
+        <div class="container">
+        {% for category in categories %}
+        <div class="category-section">
+            <div class="section-title">
+                <h2 data-lang-hu="{{ category.name_hu }}" data-lang-sk="{{ category.name_sk }}">
+                    {% if LANGUAGE_CODE == 'sk' %}{{ category.name_sk }}{% else %}{{ category.name_hu }}{% endif %}
+                </h2>
+            </div>
+            <div class="products-grid">
+                {% for product in category.products.all %}
+                <div class="product-card">
+                    <div class="product-img-container">
+                        {% if product.images.exists %}
+                            <img src="{{ product.images.first.image.url }}" alt="{{ product.name_hu }}" class="product-img">
+                        {% else %}
+                            <img src="{% static 'images/placeholder.png' %}" alt="{{ product.name_hu }}" class="product-img">
+                        {% endif %}
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title" data-lang-hu="{{ product.name_hu }}" data-lang-sk="{{ product.name_sk }}">{{ product.name_hu }}</h3>
+                            {% if LANGUAGE_CODE == 'sk' %}{{ product.name_sk }}{% else %}{{ product.name_hu }}{% endif %}
+                        </h3>
+                        <p class="product-desc" data-lang-hu="{{ product.intro_hu|truncatewords:20 }}" data-lang-sk="{{ product.intro_sk|truncatewords:20 }}">
+                            {% if LANGUAGE_CODE == 'sk' %}{{ product.intro_sk|truncatewords:20 }}{% else %}{{ product.intro_hu|truncatewords:20 }}{% endif %}
+                        </p>
+                        <div class="product-cta">
+                            <a href="{% url 'forestry:product_detail' product.id %}" class="btn btn-sm" data-lang-hu="Részletek" data-lang-sk="Podrobnosti">
+                                {# Az eredeti if-et akár ki is veheted, ha már csak a JS fordít #}
+                                Részletek
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p>
+                    {% if LANGUAGE_CODE == 'sk' %}
+                        V tejto kategórii zatiaľ nie sú žiadne produkty.
+                    {% else %}
+                        Ebben a kategóriában még nincsenek termékek.
+                    {% endif %}
+                </p>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

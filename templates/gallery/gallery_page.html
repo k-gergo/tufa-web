@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+    {% if LANGUAGE_CODE == 'sk' %}Galéria{% else %}Galéria{% endif %} - TUFA MACHINE
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/gallery.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="gallery-section">
+    <div class="container">
+        <div class="section-title">
+            <h1>
+                {% if LANGUAGE_CODE == 'sk' %}Galéria{% else %}Galéria{% endif %}
+            </h1>
+            <p>
+                {% if LANGUAGE_CODE == 'sk' %}
+                    Pozrite si naše obrázky z našich prác a produktov.
+                {% else %}
+                    Tekintse meg képeinket munkáinkról és termékeinkről.
+                {% endif %}
+            </p>
+        </div>
+        <div class="gallery-grid">
+            {% for image in images %}
+            <div class="gallery-item" data-index="{{ forloop.counter0 }}">
+                <img src="{{ image.image.url }}"
+                     alt="{% if LANGUAGE_CODE == 'sk' %}{{ image.alt_text_sk|default:image.title_sk|default:_('Galéria kép') }}{% else %}{{ image.alt_text_hu|default:image.title_hu|default:_('Galéria kép') }}{% endif %}">
+                <div class="caption">
+                    {% if LANGUAGE_CODE == 'sk' %}
+                        {{ image.title_sk|default:image.title_hu }}
+                    {% else %}
+                        {{ image.title_hu|default:image.title_sk }}
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <p>
+                {% if LANGUAGE_CODE == 'sk' %}
+                    V galérii zatiaľ nie sú žiadne obrázky.
+                {% else %}
+                    A galériában még nincsenek képek.
+                {% endif %}
+            </p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Modal/Lightbox -->
+    <div id="gallery-modal" class="gallery-modal">
+        <span class="modal-close" id="modal-close">&times;</span>
+        <span class="modal-arrow modal-prev" id="modal-prev">&#10094;</span>
+        <img class="modal-content" id="modal-img" src="" alt="">
+        <span class="modal-arrow modal-next" id="modal-next">&#10095;</span>
+        <div class="modal-caption" id="modal-caption"></div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/gallery.js' %}"></script>
+{% endblock %}

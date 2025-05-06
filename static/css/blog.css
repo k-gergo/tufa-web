@@ -1,0 +1,570 @@
+/* ============================================
+   BLOG STÍLUSOK
+============================================ */
+
+/* Blog oldal hero banner */
+.blog-hero {
+    position: relative;
+    height: 380px;
+    margin-bottom: 3rem;
+}
+
+.blog-hero .hero-text {
+    border-left-color: var(--primary);
+}
+
+/* Blog container */
+.blog-section {
+    padding: 3rem 0 5rem;
+}
+
+.blog-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Blog grid */
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+/* Blog kártyák */
+.blog-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.blog-img-container {
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+}
+
+.blog-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.blog-card:hover .blog-img {
+    transform: scale(1.05);
+}
+
+.blog-category {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: var(--primary);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.blog-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.blog-title {
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.blog-title a {
+    color: var(--secondary);
+    transition: var(--transition);
+}
+
+.blog-title a:hover {
+    color: var(--primary);
+}
+
+.blog-meta {
+    margin-bottom: 1rem;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.blog-date {
+    display: inline-block;
+}
+
+.blog-excerpt {
+    color: #555;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+    line-height: 1.6;
+}
+
+.blog-read-more {
+    display: inline-block;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    margin-top: auto;
+}
+
+.blog-read-more:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* Play gomb videókhoz */
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.play-button::after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-left: 20px solid white;
+    margin-left: 4px;
+}
+
+/* Üres blog üzenet */
+.empty-blog {
+    text-align: center;
+    padding: 3rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.empty-blog p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+/* Lapozás */
+.pagination {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.pagination-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: white;
+    color: var(--secondary);
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.pagination-link:hover,
+.pagination-link.active {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* Cikk részletes oldal */
+.blog-single-section {
+    padding: 4rem 0;
+}
+
+.blog-single {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+    padding: 2rem;
+}
+
+.blog-header {
+    margin-bottom: 1.5rem;
+}
+
+.blog-single .blog-title {
+    font-size: 2.5rem;
+    line-height: 1.3;
+    margin-bottom: 1.5rem;
+}
+
+.blog-single .blog-meta {
+    margin-bottom: 1rem;
+}
+
+.blog-category-badge {
+    display: inline-block;
+    background-color: var(--primary);
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-right: 1rem;
+}
+
+.blog-featured-image {
+    margin-bottom: 2rem;
+}
+
+.blog-featured-image img {
+    width: 100%;
+    height: auto;
+    max-height: 600px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Videó beállítások */
+.blog-featured-video {
+    margin-bottom: 2rem;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 arány */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.video-container iframe,
+.video-container object,
+.video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
+.blog-content-wrap {
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.8;
+}
+
+.blog-content-wrap p {
+    margin-bottom: 1.5rem;
+}
+
+.blog-content-wrap h1 {
+    font-size: 2.2rem;
+    margin: 2rem 0 1rem;
+    color: var(--secondary);
+}
+
+.blog-content-wrap h2 {
+    font-size: 1.8rem;
+    margin: 1.8rem 0 1rem;
+    color: var(--secondary);
+}
+
+.blog-content-wrap h3 {
+    font-size: 1.5rem;
+    margin: 1.5rem 0 1rem;
+    color: var(--secondary);
+}
+
+.blog-content-wrap strong {
+    font-weight: 700;
+}
+
+.blog-content-wrap em {
+    font-style: italic;
+}
+
+.blog-content-wrap ul {
+    margin-left: 2rem;
+    margin-bottom: 1.5rem;
+    list-style-type: disc;
+}
+
+.blog-content-wrap ol {
+    margin-left: 2rem;
+    margin-bottom: 1.5rem;
+    list-style-type: decimal;
+}
+
+.blog-content-wrap li {
+    margin-bottom: 0.5rem;
+}
+
+.blog-content-wrap a {
+    color: var(--primary);
+    font-weight: 500;
+}
+
+.blog-content-wrap a:hover {
+    text-decoration: underline;
+}
+
+.blog-content-wrap img {
+    max-width: 100%;
+    height: auto;
+    margin: 1.5rem 0;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.blog-content-wrap blockquote {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border-left: 5px solid var(--primary);
+    background-color: #f9f9f9;
+    font-style: italic;
+    color: #555;
+}
+
+.blog-content-wrap pre {
+    background-color: #f5f5f5;
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+}
+
+.blog-content-wrap code {
+    background-color: #f5f5f5;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-family: monospace;
+}
+
+/* Galéria */
+.blog-gallery {
+    margin-top: 3rem;
+}
+
+.blog-gallery h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--secondary);
+    text-align: center;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.blog-gallery h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: var(--primary);
+}
+
+.blog-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    height: 250px;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.gallery-link {
+    display: block;
+    height: 100%;
+}
+
+.gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.gallery-item:hover .gallery-img {
+    transform: scale(1.05);
+}
+
+.gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    padding: 1.5rem 1rem 1rem;
+    color: white;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .gallery-caption {
+    transform: translateY(0);
+}
+
+.gallery-caption h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+/* Navigáció */
+.post-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.back-to-blog {
+    display: inline-block;
+    padding: 0.7rem 1.5rem;
+    background-color: var(--secondary);
+    color: white;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.back-to-blog:hover {
+    background-color: var(--primary);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+}
+
+/* További bejegyzések szekció */
+.related-posts-section {
+    padding: 4rem 0;
+    background-color: #f8f8f8;
+}
+
+.related-posts-section .section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.related-posts-section .section-title h2 {
+    font-size: 2.2rem;
+    color: var(--secondary);
+    position: relative;
+    display: inline-block;
+    padding-bottom: 1rem;
+}
+
+.related-posts-section .section-title h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: var(--primary);
+}
+
+/* Reszponzív beállítások */
+@media (max-width: 1200px) {
+    .blog-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
+
+@media (max-width: 991px) {
+    .blog-single .blog-title {
+        font-size: 2rem;
+    }
+    
+    .blog-gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 767px) {
+    .blog-hero {
+        height: 300px;
+    }
+    
+    .blog-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .blog-img-container {
+        height: 200px;
+    }
+    
+    .blog-title {
+        font-size: 1.3rem;
+    }
+    
+    .blog-single .blog-title {
+        font-size: 1.8rem;
+    }
+    
+    .blog-single {
+        padding: 1.5rem;
+    }
+    
+    .blog-gallery-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .gallery-item {
+        height: 200px;
+    }
+}
+
+@media (max-width: 576px) {
+    .blog-hero {
+        height: 250px;
+    }
+    
+    .blog-img-container {
+        height: 180px;
+    }
+    
+    .blog-single .blog-title {
+        font-size: 1.5rem;
+    }
+}

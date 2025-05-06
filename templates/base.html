@@ -1,0 +1,47 @@
+{% load static %} {# Ez kell a CSS, JS, Képek hivatkozásához #}
+
+<!DOCTYPE html>
+<html lang="hu"> {# A nyelvet később dinamikusan kezeljük majd #}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {# A title blokkba kerül majd az aloldal egyedi címe #}
+    <title>{% block title %}TUFA MACHINE{% endblock %}</title>
+
+    {# Hivatkozás a külső CSS fájlra #}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'swiper/swiper-bundle.min.css' %}" />
+
+    {# Hely extra, oldalspecifikus CSS-nek, ha később kell #}
+    {% block extra_css %}{% endblock %}
+    <script src="{% static 'js/main.js' %}"></script>
+</head>
+<body>
+
+    {# Beillesztjük a fejlécet egy külön fájlból #}
+    {% include 'partials/header.html' %}
+
+    {# Beillesztjük a navigációt egy külön fájlból #}
+    {% include 'partials/nav.html' %}
+
+    {# A figyelmeztető sáv marad itt IDE JONNE A WARNING STRIPE #}
+    
+
+    {# Fő tartalom blokkja - Ide töltődik be az index.html vagy xcmg.html egyedi tartalma #}
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    {# Beillesztjük a láblécet egy külön fájlból #}
+    {% include 'partials/footer.html' %}
+
+    {# Hivatkozás a külső JavaScript fájlra #}
+    <script src="{% static 'swiper/swiper-bundle.min.js' %}"></script>
+
+
+    {# Hely extra, oldalspecifikus JS-nek, ha később kell #}
+    {% block extra_js %}{% endblock %}
+
+</body>
+</html>

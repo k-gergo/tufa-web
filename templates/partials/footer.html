@@ -1,0 +1,104 @@
+{% load static %}
+{% load i18n %} {# Az évszámhoz #}
+
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+
+            {# === 1. Oszlop: Logó, Leírás, Social === #}
+            <div>
+                <div class="footer-about">
+                    <img src="{% static 'images/tm_logo_sz.jpg' %}" alt="TUFA MACHINE logo" class="footer-logo" >
+                    <p data-lang-hu="15 éve az építőipari gépek és berendezések forgalmazásában."
+                       data-lang-sk="15 rokov v predaji stavebných strojov a zariadení.">
+                        15 éve az építőipari gépek és berendezések forgalmazásában.
+                    </p>
+                </div>
+                <div class="social-links">
+                    {# Közösségi Média Ikonok (képekkel) #}
+                    <a href="https://www.facebook.com/tufamachinehu" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="social-link">
+                        <img src="{% static 'images/facebook.png' %}" alt="Facebook">
+                    </a>
+                    <a href="https://www.tiktok.com/@tufamachine" target="_blank" rel="noopener noreferrer" aria-label="TikTok" class="social-link">
+                        <img src="{% static 'images/tiktok.png' %}" alt="TikTok">
+                    </a>
+                    <a href="https://www.instagram.com/tufamachine/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-link">
+                        <img src="{% static 'images/insta.png' %}" alt="Instagram">
+                    </a>
+                    <a href="https://www.youtube.com/@tufamaximus" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="social-link">
+                        <img src="{% static 'images/yt.png' %}" alt="YouTube">
+                    </a>
+                </div>
+            </div>
+
+            {# === 2. Oszlop: Navigáció (Fix href-ekkel) === #}
+            <div>
+                <h3 class="footer-title" data-lang-hu="Navigáció" data-lang-sk="Navigácia">Navigáció</h3>
+                <ul class="footer-links">
+                    <li><a href="/" data-lang-hu="Főoldal" data-lang-sk="Domov">Főoldal</a></li>
+                    <li><a href="/galeria/" data-lang-hu="Galéria" data-lang-sk="Galéria">Galéria</a></li>
+                    <li><a href="/kapcsolat/" data-lang-hu="Kapcsolat" data-lang-sk="Kontakt">Kapcsolat</a></li>
+                    <li><a href="/blog/" data-lang-hu="Blog" data-lang-sk="Blog">Blog</a></li>
+                    <li><a href="/kapcsolat/garancia/" data-lang-hu="Garancia" data-lang-sk="Záruka">garancia</a></li>
+                </ul>
+            </div>
+
+            {# === 3. Oszlop: Termékek (Fix href-ekkel) === #}
+            <div>
+                 <h3 class="footer-title" data-lang-hu="Termékek" data-lang-sk="Produkty">Termékek</h3>
+                 <ul class="footer-links">
+                     <li><a href="/xcmg-gepek/" data-lang-hu="XCMG munkagépek" data-lang-sk="XCMG stroje">XCMG munkagépek</a></li>
+                     <li><a href="/erdeszeti-gepek/" data-lang-hu="Erdészeti gépek" data-lang-sk="Lesné stroje">Erdészeti gépek</a></li>
+                     <li><a href="/mezogazdasagi-gepek/" data-lang-hu="Mezőgazdasági gépek" data-lang-sk="Poľnohospodárske stroje">Mezőgazdasági gépek</a></li>
+                     <li><a href="/epitoipari-gepek/" data-lang-hu="Építőipari gépek" data-lang-sk="Stavebné stroje">Építőipari gépek</a></li>
+                     <li><a href="/rampak/" data-lang-hu="Rámpák" data-lang-sk="Rámpy">Rámpák</a></li>
+                     <li><a href="/hasznalt-gepek/" data-lang-hu="Használt gépek" data-lang-sk="Použité stroje">Használt gépek</a></li>
+                 </ul>
+            </div>
+
+            {# === 4. Oszlop: Elérhetőségek === #}
+            <div class="footer-contact-info">
+                <h3 class="footer-title" data-lang-hu="Elérhetőségek" data-lang-sk="Kontaktné údaje">Elérhetőségek</h3>
+
+                <!-- Magyar elérhetőségek -->
+                <div id="contact-hu" style="display: block;">
+                    <p>
+                        <i class="fas fa-map-marker-alt"></i>&nbsp;
+                        <a href="https://maps.app.goo.gl/Q4noX8mHqU7Zt7bD7" target="_blank" rel="noopener noreferrer">
+                            <span>8409, Úrkút, Béke u. 0133/1 hrsz</span>
+                        </a>
+                    </p>
+                    <p><i class="fas fa-phone"></i>&nbsp; <a href="tel:+36209442727">+36 20 944 2727</a> (Keszei Csaba)</p>
+                    <p><i class="fas fa-phone"></i>&nbsp; <a href="tel:+36317808601">+36 31 780 8601</a> (Dallos Noémi)</p>
+                    <p><i class="fas fa-phone"></i>&nbsp; <a href="tel:+36709042948">+36 70 904 2948</a> (Kőhegyi Tamás)</p>
+                    <p><i class="fas fa-envelope"></i>&nbsp; <a href="mailto:info@tufa.hu">info@tufa.hu</a></p>
+                    <p><i class="fas fa-clock"></i>&nbsp; <span>H-P: 8:00-16:00</span></p>
+                </div>
+
+                <!-- Szlovák elérhetőségek -->
+                <div id="contact-sk" style="display: none;">
+                    <p>
+                        <i class="fas fa-map-marker-alt"></i>&nbsp;
+                        <a href="https://maps.app.goo.gl/p8moxDrfJPcvyRnC9" target="_blank" rel="noopener noreferrer">
+                            <span>Nárad 564, 930 06 Nárad</span>
+                        </a>
+                    </p>
+                    <p><i class="fas fa-phone"></i>&nbsp; <a href="tel:+421917300313">+421 917 300 313</a> (Lelkes Béla)</p>
+                    <p><i class="fas fa-envelope"></i>&nbsp; <a href="mailto:info@tufa.sk">info@tufa.sk</a></p>
+                    <p><i class="fas fa-clock"></i>&nbsp; <span>Po-Pi: 8:00-16:00</span></p>
+                    <p><i class="fas fa-clock"></i>&nbsp; <span>So: 9:00-12:00</span></p>
+                </div>
+            </div>
+
+        </div>
+
+<div class="copyright">
+    <p>&copy; {% now "Y" %} TUFA MACHINE Kft. – Minden jog fenntartva.
+        <span data-lang-hu="Készítette: ">Készítette: </span>
+        <a href="https://kgdigital.hu" target="_blank" rel="noopener noreferrer">kgdigital.hu</a>
+        </span>
+    </p>
+</div>
+
+    </div>
+</footer>

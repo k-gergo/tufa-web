@@ -1,0 +1,266 @@
+A7qOAhQxD2
+
+
+HTML:
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %} {# Hozzáadva a nyelvi kezeléshez #}
+
+{% block title %}TUFA MACHINE - Főoldal{% endblock %}
+
+{% block content %}
+    {% comment %} --- Hero Szekció --- {% endcomment %}
+    <section class="hero">
+        {# JAVÍTVA: static tag használata #}
+        <img src="{% static 'pics/index/Excavator.jpg' %}" alt="{% trans "Építőipari gépek" %}" class="hero-bg">
+        <div class="container">
+            <div class="hero-content">
+                <h1 data-lang-hu="ÉPÍTŐIPARI, ERDÉSZETI ÉS MEZŐGAZDASÁGI GÉPEK"
+                    data-lang-sk="STAVEBNÉ, LESNÉ A POĽNOHOSPODÁRSKE STROJE">
+                    {% if LANGUAGE_CODE == 'sk' %}STAVEBNÉ, LESNÉ A POĽNOHOSPODÁRSKE STROJE{% else %}ÉPÍTŐIPARI, ERDÉSZETI ÉS MEZŐGAZDASÁGI GÉPEK{% endif %}
+                </h1>
+                <p data-lang-hu="Cégünk immár 15 éve áll ügyfelei szolgálatában az építőiparban használatos új és használt gépek, berendezések és kiegészítők forgalmazásában."
+                   data-lang-sk="Naša spoločnosť už 15 rokov slúži svojim zákazníkom v oblasti predaja nových a použitých strojov, zariadení a príslušenstva používaných v stavebníctve.">
+                   {% if LANGUAGE_CODE == 'sk' %}Naša spoločnosť už 15 rokov slúži svojim zákazníkom v oblasti predaja nových a použitých strojov, zariadení a príslušenstva používaných v stavebníctve.{% else %}Cégünk immár 15 éve áll ügyfelei szolgálatában az építőiparban használatos új és használt gépek, berendezések és kiegészítők forgalmazásában.{% endif %}
+                </p>
+                {# JAVÍTVA: url tag használata (feltételezve, hogy van 'contact' nevű URL) #}
+                {# Ha nincs, maradhat a /kapcsolat/ is #}
+                <a href="/kapcsolat" class="btn" data-lang-hu="Kapcsolatfelvétel" data-lang-sk="Kontaktujte nás">{% if LANGUAGE_CODE == 'sk' %}Kontaktujte nás{% else %}Kapcsolatfelvétel{% endif %}</a>
+            </div>
+        </div>
+    </section>
+
+    {% comment %} --- Gépkategóriák / Fő Szekciók (Statikus) --- {% endcomment %}
+    <section class="machine-categories">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-lang-hu="Termékek" data-lang-sk="Produkty">{% if LANGUAGE_CODE == 'sk' %}Produkty{% else %}Termékek{% endif %}</h2>
+            </div>
+
+            <div class="category-grid">
+                {# Statikus kártya 1: Erdészeti #}
+                <div class="category-card">
+                    {# JAVÍTVA: static tag #}
+                    <img src="{% static 'pics/index/erdeszeti_gepek.jpg' %}" alt="Erdészeti gépek" class="category-img">
+                    <div class="category-overlay">
+                        <h3 class="category-title" data-lang-hu="Erdészeti gépek" data-lang-sk="Lesné stroje">{% if LANGUAGE_CODE == 'sk' %}Lesné stroje{% else %}Erdészeti gépek{% endif %}</h3>
+                        <p data-lang-hu="Speciális erdészeti és faipari munkagépek, aprítók, darálók, zúzók, szárzúzók és más erdészeti megoldások."
+                           data-lang-sk="Špeciálne lesnícke a drevárske stroje, štiepkovače, drviče, mulčovače a iné lesnícke riešenia.">
+                           {% if LANGUAGE_CODE == 'sk' %}Špeciálne lesnícke a drevárske stroje...{% else %}Speciális erdészeti és faipari munkagépek...{% endif %}
+                        </p>
+                        {# JAVÍTVA: url tag #}
+                        <a href="{% url 'forestry:forestry_list' %}" class="category-link" data-lang-hu="Részletek &rarr;" data-lang-sk="Podrobnosti &rarr;">{% if LANGUAGE_CODE == 'sk' %}Podrobnosti &rarr;{% else %}Részletek &rarr;{% endif %}</a>
+                    </div>
+                </div>
+
+                {# Statikus kártya 2: Mezőgazdasági #}
+                <div class="category-card">
+                    {# JAVÍTVA: static tag #}
+                    <img src="{% static 'pics/index/mezogazd_gepek.jpg' %}" alt="Mezőgazdasági gépek" class="category-img">
+                    <div class="category-overlay">
+                        <h3 class="category-title" data-lang-hu="Mezőgazdasági gépek" data-lang-sk="Poľnohospodárske stroje">{% if LANGUAGE_CODE == 'sk' %}Poľnohospodárske stroje{% else %}Mezőgazdasági gépek{% endif %}</h3>
+                        <p data-lang-hu="Modern mezőgazdasági gépek és adapterek, traktorok, talajművelők, betakarítógépek és más tartozékok."
+                           data-lang-sk="Moderné poľnohospodárske stroje a adaptéry, traktory, kultivátory, zberacie stroje a iné príslušenstvo.">
+                           {% if LANGUAGE_CODE == 'sk' %}Moderné poľnohospodárske stroje a adaptéry...{% else %}Modern mezőgazdasági gépek és adapterek...{% endif %}
+                        </p>
+                        {# JAVÍTVA: url tag #}
+                        <a href="{% url 'mezogazdasag:mezogazdasag_list' %}" class="category-link" data-lang-hu="Részletek &rarr;" data-lang-sk="Podrobnosti &rarr;">{% if LANGUAGE_CODE == 'sk' %}Podrobnosti &rarr;{% else %}Részletek &rarr;{% endif %}</a>
+                    </div>
+                </div>
+
+                 {# Statikus kártya 3: Építőipari #}
+                <div class="category-card">
+                     {# JAVÍTVA: static tag #}
+                    <img src="{% static 'pics/index/epitoipari_gepek.jpg' %}" alt="Építőipari gépek" class="category-img">
+                    <div class="category-overlay">
+                        <h3 class="category-title" data-lang-hu="Építőipari gépek" data-lang-sk="Stavebné stroje">{% if LANGUAGE_CODE == 'sk' %}Stavebné stroje{% else %}Építőipari gépek{% endif %}</h3>
+                        <p data-lang-hu="Professzionális építőipari munkagépek, kanalak, bontókalapácsok, markolók, rakodók és más eszközök."
+                           data-lang-sk="Profesionálne stavebné stroje, lyžice, búracie kladivá, rýpadlá, nakladače a iné zariadenia.">
+                           {% if LANGUAGE_CODE == 'sk' %}Profesionálne stavebné stroje...{% else %}Professzionális építőipari munkagépek...{% endif %}
+                        </p>
+                         {# JAVÍTVA: url tag #}
+                        <a href="{% url 'epiteszet:epiteszet_list' %}" class="category-link" data-lang-hu="Részletek &rarr;" data-lang-sk="Podrobnosti &rarr;">{% if LANGUAGE_CODE == 'sk' %}Podrobnosti &rarr;{% else %}Részletek &rarr;{% endif %}</a>
+                    </div>
+                </div>
+
+                 {# Statikus kártya 4: Rámpák (ÚJ) #}
+                <div class="category-card">
+                     {# JAVÍTVA: static tag #}
+                    <img src="{% static 'pics/index/rampak.jpg' %}" alt="Rámpák" class="category-img"> {# Figyelj, hogy legyen ilyen képed! #}
+                    <div class="category-overlay">
+                        <h3 class="category-title" data-lang-hu="Rámpák" data-lang-sk="Rampy">{% if LANGUAGE_CODE == 'sk' %}Rampy{% else %}Rámpák{% endif %}</h3>
+                        <p data-lang-hu="Minőségi felhajtó rámpák széles választéka..."
+                           data-lang-sk="Široký výber kvalitných nájazdových rámp...">
+                           {% if LANGUAGE_CODE == 'sk' %}Široký výber kvalitných nájazdových rámp...{% else %}Minőségi felhajtó rámpák széles választéka...{% endif %}
+                        </p>
+                         {# JAVÍTVA: url tag #}
+                        <a href="{% url 'rampak:rampak_list' %}" class="category-link" data-lang-hu="Részletek &rarr;" data-lang-sk="Podrobnosti &rarr;">{% if LANGUAGE_CODE == 'sk' %}Podrobnosti &rarr;{% else %}Részletek &rarr;{% endif %}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% comment %} --- Kiemelt Gépek (Statikus) --- {% endcomment %}
+    <section class="xcmg-showcase">
+        <div class="xcmg-bg"></div>
+        <div class="container xcmg-container">
+            <div class="xcmg-header">
+                 {# JAVÍTVA: static tag #}
+                <img src="{% static 'pics/index/xcmg1.png' %}" alt="XCMG Logo" class="xcmg-logo">
+                <div class="xcmg-intro">
+                    <h3 data-lang-hu="Az XCMG hivatalos magyarországi forgalmazója"
+                        data-lang-sk="Oficiálny distribútor XCMG v Maďarsku">
+                        {% if LANGUAGE_CODE == 'sk' %}Oficiálny distribútor XCMG v Maďarsku{% else %}Az XCMG hivatalos magyarországi forgalmazója{% endif %}
+                    </h3>
+                    <p data-lang-hu="Cégünk hivatalosan is az új XCMG munkagépek hivatalos viszonteladói partnerévé vált Magyarországon és Szlovákiában is. Válogasson az XCMG munkagépek széleskörű kínálatából!"
+                       data-lang-sk="Naša spoločnosť sa oficiálne stala partnerom predaja nových strojov XCMG v Maďarsku a na Slovensku. Vyberte si zo širokej ponuky strojov XCMG!">
+                       {% if LANGUAGE_CODE == 'sk' %}Naša spoločnosť sa oficiálne stala partnerom predaja nových strojov XCMG v Maďarsku a na Slovensku. Vyberte si zo širokej ponuky strojov XCMG!{% else %}Cégünk hivatalosan is az új XCMG munkagépek hivatalos viszonteladói partnerévé vált Magyarországon és Szlovákiában is. Válogasson az XCMG munkagépek széleskörű kínálatából!{% endif %}
+                    </p>
+                </div>
+            </div>
+
+            <div class="section-title" style="margin-top: 3rem;">
+                 <h2 data-lang-hu="Kiemelt Ajánlataink" data-lang-sk="Odporúčané Produkty">{% if LANGUAGE_CODE == 'sk' %}Odporúčané Produkty{% else %}Kiemelt Ajánlataink{% endif %}</h2>
+            </div>
+
+            <div class="products-grid">
+                 {# Ezek a kártyák statikusak maradnak, de javítjuk a kép útvonalakat és a linkeket #}
+                 {# Statikus kártya 1 #}
+                 <div class="product-card">
+                      <div class="product-img-container">
+                          {# JAVÍTVA: static tag #}
+                          <img src="{% static 'pics/index/gep1.jpg' %}" alt="XCMG XE20E" class="product-img">
+                      </div>
+                      <div class="product-content">
+                          <h3 class="product-title">XCMG XE20E Mini Kotrógép</h3>
+                          <p class="product-desc">Egy kompakt és sokoldalú minikotró, amely kiváló választás szűk helyeken végzett munkákhoz.</p>
+                          <div class="product-cta">
+                              <span class="product-price" data-lang-hu="Érdeklődjön!" data-lang-sk="Informujte sa!">{% if LANGUAGE_CODE == 'sk' %}Informujte sa!{% else %}Érdeklődjön!{% endif %}</span>
+                              {# JAVÍTVA: url tag. CSERÉLD az ID-t a valós termék ID-ra! #}
+                              <a href="{% url 'xcmg:product_detail' 5 %}" class="btn btn-sm" data-lang-hu="Részletek" data-lang-sk="Podrobnosti">{% if LANGUAGE_CODE == 'sk' %}Podrobnosti{% else %}Részletek{% endif %}</a>
+                          </div>
+                      </div>
+                  </div>
+                  {# Statikus kártya 2 #}
+                  <div class="product-card">
+                       <div class="product-img-container">
+                           {# JAVÍTVA: static tag #}
+                           <img src="{% static 'pics/index/gep2.jpg' %}" alt="XCMG XE27E" class="product-img">
+                       </div>
+                       <div class="product-content">
+                           <h3 class="product-title">XCMG XE27E Mini Kotrógép</h3>
+                           <p class="product-desc">Megbízható teljesítményével és alacsony üzemanyag fogyasztásával ideális eszköz...</p>
+                           <div class="product-cta">
+                               <span class="product-price" data-lang-hu="Érdeklődjön!" data-lang-sk="Informujte sa!">{% if LANGUAGE_CODE == 'sk' %}Informujte sa!{% else %}Érdeklődjön!{% endif %}</span>
+                               {# JAVÍTVA: url tag. CSERÉLD az ID-t! #}
+                               <a href="{% url 'xcmg:product_detail' 6 %}" class="btn btn-sm" data-lang-hu="Részletek" data-lang-sk="Podrobnosti">{% if LANGUAGE_CODE == 'sk' %}Podrobnosti{% else %}Részletek{% endif %}</a>
+                           </div>
+                       </div>
+                   </div>
+                   {# Statikus kártya 3 #}
+                   <div class="product-card">
+                        <div class="product-img-container">
+                             {# JAVÍTVA: static tag #}
+                            <img src="{% static 'pics/index/gep3.jpg' %}" alt="XCMG XC7-SR08 Skid Loader" class="product-img">
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">XCMG XC7-SR08 Skid Loader</h3>
+                            <p class="product-desc">Ideális választás az építőipar, mezőgazdaság, közművesítés vagy akár tereprendezési feladatok elvégzéséhez.</p>
+                            <div class="product-cta">
+                                <span class="product-price" data-lang-hu="Érdeklődjön!" data-lang-sk="Informujte sa!">{% if LANGUAGE_CODE == 'sk' %}Informujte sa!{% else %}Érdeklődjön!{% endif %}</span>
+                                {# JAVÍTVA: url tag. CSERÉLD az ID-t! #}
+                                <a href="{% url 'xcmg:product_detail' 4 %}" class="btn btn-sm" data-lang-hu="Részletek" data-lang-sk="Podrobnosti">{% if LANGUAGE_CODE == 'sk' %}Podrobnosti{% else %}Részletek{% endif %}</a>
+                            </div>
+                        </div>
+                    </div>
+                    {# Statikus kártya 4 #}
+                    <div class="product-card">
+                         <div class="product-img-container">
+                              {# JAVÍTVA: static tag #}
+                             <img src="{% static 'pics/index/gep4.jpg' %}" alt="XCMG XC7-TV12 Kompakt rakodó" class="product-img">
+                         </div>
+                         <div class="product-content">
+                             <h3 class="product-title">XCMG XC7-TV12 Kompakt rakodó</h3>
+                             <p class="product-desc">Sokoldalú és kompakt munkagépek csúcsa, amely nemcsak hatékonyságával...</p>
+                             <div class="product-cta">
+                                 <span class="product-price" data-lang-hu="Érdeklődjön!" data-lang-sk="Informujte sa!">{% if LANGUAGE_CODE == 'sk' %}Informujte sa!{% else %}Érdeklődjön!{% endif %}</span>
+                                 {# JAVÍTVA: url tag. CSERÉLD az ID-t! #}
+                                 <a href="{% url 'xcmg:product_detail' 3 %}" class="btn btn-sm" data-lang-hu="Részletek" data-lang-sk="Podrobnosti">{% if LANGUAGE_CODE == 'sk' %}Podrobnosti{% else %}Részletek{% endif %}</a>
+                             </div>
+                         </div>
+                     </div>
+            </div>
+
+            {# JAVÍTVA: url tag #}
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="{% url 'xcmg:xcmg_list' %}" class="btn" data-lang-hu="Összes XCMG gép" data-lang-sk="Všetky stroje XCMG">{% if LANGUAGE_CODE == 'sk' %}Všetky stroje XCMG{% else %}Összes XCMG gép{% endif %}</a>
+            </div>
+        </div>
+    </section>
+
+    {% comment %} --- Rólunk Szekció --- {% endcomment %}
+    <section class="about-section">
+        <div class="container">
+            <div class="about-container">
+                <div class="about-content">
+                    <h2 class="about-title" data-lang-hu="Üdvözöljük a TUFA MACHINE oldalán!" data-lang-sk="Vitajte na stránke TUFA MACHINE!">{% if LANGUAGE_CODE == 'sk' %}Vitajte na stránke TUFA MACHINE!{% else %}Üdvözöljük a TUFA MACHINE oldalán!{% endif %}</h2>
+                    <p class="about-text"
+                       data-lang-hu='Cégünk immár <span class="highlight">15 éve</span> ... forgalmazásával.'
+                       data-lang-sk='Naša spoločnosť už <span class="highlight">15 rokov</span> ... poľnohospodárstvo.'>
+                       {% if LANGUAGE_CODE == 'sk' %}Naša spoločnosť už <span class="highlight">15 rokov</span> ... poľnohospodárstvo.{% else %}Cégünk immár <span class="highlight">15 éve</span> ... forgalmazásával.{% endif %}
+                    </p>
+                    <p class="about-text"
+                       data-lang-hu='Magyarországi telephelyünk <span class="highlight">Veszprém megyében, Úrkúton</span> ... <span class="highlight">XCMG gépeket</span> is.'
+                       data-lang-sk='Naša maďarská pobočka sa nachádza v <span class="highlight">Úrkúte, vo Vesprémskej župe</span> ... <span class="highlight">XCMG</span>.'>
+                       {% if LANGUAGE_CODE == 'sk' %}Naša maďarská pobočka sa nachádza v <span class="highlight">Úrkúte, vo Vesprémskej župe</span> ... <span class="highlight">XCMG</span>.{% else %}Magyarországi telephelyünk <span class="highlight">Veszprém megyében, Úrkúton</span> ... <span class="highlight">XCMG gépeket</span> is.{% endif %}
+                    </p>
+                </div>
+                <div class="about-image">
+                    {# JAVÍTVA: static tag #}
+                    <img src="{% static 'pics/index/tm_logo_sz.jpg' %}" alt="TUFA MACHINE telephely">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% comment %} --- Partnerek Szekció (DINAMIKUS) --- {% endcomment %}
+    <section class="partners-section">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-lang-hu="Partnereink és képviselt márkák" data-lang-sk="Naši partneri a zastúpené značky">{% if LANGUAGE_CODE == 'sk' %}Naši partneri a zastúpené značky{% else %}Partnereink és képviselt márkák{% endif %}</h2>
+            </div>
+
+             {# Statikus részek törölve, helyette a dinamikus ciklus #}
+             <div class="partners-grid"> {# Egyetlen grid konténer. CSS-sel kellhet az elrendezést finomítani. #}
+                 {% for partner in partners %} {# Feltételezi, hogy a view átadja a 'partners' listát #}
+                     {% if partner.website_url %}
+                         <a href="{{ partner.website_url }}" target="_blank" rel="noopener noreferrer" title="{{ partner.name }}">
+                             {# Dinamikusan betöltött logó - a partner.logo.url már tartalmazza a MEDIA_URL-t #}
+                             <img src="{{ partner.logo.url }}" alt="{{ partner.name }}" class="partner-logo">
+                         </a>
+                     {% else %}
+                         {# Dinamikusan betöltött logó link nélkül #}
+                         <img src="{{ partner.logo.url }}" alt="{{ partner.name }}" class="partner-logo">
+                     {% endif %}
+                 {% empty %}
+                     <p>{% if LANGUAGE_CODE == 'sk' %}Žiadni partneri na zobrazenie.{% else %}Nincsenek megjeleníthető partnerek.{% endif %}</p>
+                 {% endfor %}
+             </div>
+        </div>
+    </section>
+
+    {% comment %} --- CTA Szekció --- {% endcomment %}
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title" data-lang-hu="Kérdései vannak?" data-lang-sk="Máte otázky?">{% if LANGUAGE_CODE == 'sk' %}Máte otázky?{% else %}Kérdései vannak?{% endif %}</h2>
+            <p class="cta-text"
+               data-lang-hu="..." data-lang-sk="...">
+               {% if LANGUAGE_CODE == 'sk' %}...{% else %}...{% endif %}
+            </p>
+             {# JAVÍTVA: url tag #}
+            <a href="/kapcsolat/" class="btn btn-light" data-lang-hu="Kapcsolatfelvétel" data-lang-sk="Kontaktujte nás">{% if LANGUAGE_CODE == 'sk' %}Kontaktujte nás{% else %}Kapcsolatfelvétel{% endif %}</a>
+        </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{% if LANGUAGE_CODE == 'sk' %}{{ product.name_sk }}{% else %}{{ product.name_hu }}{% endif %} - Használt Gépek - TUFA MACHINE {# Módosított Title #}
+{% endblock %}
+
+{# ... másold ide az előző product_detail.html többi részét ... #}
+{# Fontos: Ha új mezőket (pl. évjárat, üzemóra, ár) adtál hozzá a modellhez, #}
+{# azokat itt jelenítsd meg a product objektumból, pl. a Műszaki adatok előtt/után/között #}
+{# Példa új mezők megjelenítésére: #}
+{#
+{% block content %}
+...
+        <div class="product-detail-layout" ...>
+            ... (Galéria, Bevezető) ...
+
+            {# Új adatok megjelenítése #}
+            <div class="used-specific-data" style="margin-bottom: 2rem; padding: 1rem; background-color: #f8f9fa; border-radius: 4px;">
+                <h4 style="margin-bottom: 1rem;" data-lang-hu="Főbb adatok" data-lang-sk="Hlavné údaje">Főbb adatok</h4>
+                <ul style="list-style: none; padding-left: 0;">
+                    {% if product.evjarat %}<li><strong>{% if LANGUAGE_CODE == 'sk' %}Ročník{% else %}Évjárat{% endif %}:</strong> {{ product.evjarat }}</li>{% endif %}
+                    {% if product.uzemora %}<li><strong>{% if LANGUAGE_CODE == 'sk' %}Prevádzkové hodiny{% else %}Üzemóra{% endif %}:</strong> {{ product.uzemora }} óra</li>{% endif %}
+                    {% if product.allapot_hu %}<li><strong>{% if LANGUAGE_CODE == 'sk' %}Stav{% else %}Állapot{% endif %}:</strong> {% if LANGUAGE_CODE == 'sk' %}{{ product.allapot_sk }}{% else %}{{ product.allapot_hu }}{% endif %}</li>{% endif %}
+                    {% if product.ar %}<li><strong>{% if LANGUAGE_CODE == 'sk' %}Cena{% else %}Ár{% endif %}:</strong> {{ product.ar }} Ft</li>{% endif %}
+                </ul>
+            </div>
+
+            <div class="detail-columns" ...>
+                ... (Műszaki adatok, Jellemzők) ...
+            </div>
+            ... (Miért válassza, Záró szöveg, PDF, Videó) ...
+        </div>
+...
+{% endblock %}
+#}
+
+{% block extra_css %}
+{# ... marad ugyanaz ... #}
+<style>
+    .product-gallery .swiper-button-next,
+    .product-gallery .swiper-button-prev { color: var(--primary); }
+    .product-gallery .swiper-pagination-bullet-active { background-color: var(--primary); }
+    .product-gallery .swiper-slide img { display: block; width: 100%; max-height: 500px; object-fit: contain; }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="product-detail-section" style="padding: 4rem 0;">
+    <div class="container">
+        <div class="section-title" style="margin-bottom: 2rem;">
+            <h1 data-lang-hu="{{ product.name_hu }}" data-lang-sk="{{ product.name_sk }}">{% if LANGUAGE_CODE == 'sk' %}{{ product.name_sk }}{% else %}{{ product.name_hu }}{% endif %}</h1>
+        </div>
+        <div class="product-detail-layout" style="background-color: white; padding: 2rem; border-radius: 8px; box-shadow: var(--shadow);">
+            {% if product.images.exists %}
+            <div class="swiper product-gallery" style="margin-bottom: 3rem; border: 1px solid var(--gray-light); border-radius: 4px; max-width: 90%; margin-left: auto; margin-right: auto;">
+                <div class="swiper-wrapper">
+                    {% for img in product.images.all %}
+                    <div class="swiper-slide"><img src="{{ img.image.url }}" alt="{% if LANGUAGE_CODE == 'sk' %}{{ product.name_sk }}{% else %}{{ product.name_hu }}{% endif %} - Kép {{ forloop.counter }}"></div>
+                    {% endfor %}
+                </div>
+                <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
+            </div>
+            {% else %}
+            <div class="product-main-image" style="text-align: center; margin-bottom: 2rem;"><img src="{% static 'images/placeholder.png' %}" alt="Kép nem elérhető" style="max-width: 80%; height: auto; border: 1px solid var(--gray-light);"></div>
+            {% endif %}
+
+            {% if product.intro_hu or product.intro_sk %}<p data-lang-hu="{{ product.intro_hu }}" data-lang-sk="{{ product.intro_sk }}" style="max-width: 800px; margin: 0 auto 3rem; font-size: 1.1rem; text-align: justify;">{% if LANGUAGE_CODE == 'sk' %}{{ product.intro_sk|default:product.intro_hu }}{% else %}{{ product.intro_hu|default:product.intro_sk }}{% endif %}</p>{% endif %}
+
+             {# --- IDE JÖHETNEK AZ ÚJ, HASZNÁLT GÉP SPECIFIKUS ADATOK --- #}
+            {% if product.evjarat or product.uzemora or product.ar %} {# Csak akkor jelenítjük meg, ha van mit #}
+            <div class="used-specific-data" style="margin-bottom: 2rem; padding: 1rem; background-color: #f8f9fa; border-radius: 4px;">
+                <h4 style="margin-bottom: 1rem;" data-lang-hu="Főbb adatok" data-lang-sk="Hlavné údaje">{% if LANGUAGE_CODE == 'sk' %}Hlavné údaje{% else %}Főbb adatok{% endif %}</h4>
+                <ul style="list-style: none; padding-left: 0;">
+                    {% if product.evjarat %}<li><strong>{% if LANGUAGE_CODE == 'sk' %}Ročník{% else %}Évjárat{% endif %}:</strong> {{ product.evjarat }}</li>{% endif %}
+                    {% if product.uzemora %}<li><strong>{% if LANGUAGE_CODE == 'sk' %}Prevádzkové hodiny{% else %}Üzemóra{% endif %}:</strong> {{ product.uzemora }} óra</li>{% endif %}
+                    {% if product.allapot_hu %}<li><strong>{% if LANGUAGE_CODE == 'sk' %}Stav{% else %}Állapot{% endif %}:</strong> {% if LANGUAGE_CODE == 'sk' %}{{ product.allapot_sk }}{% else %}{{ product.allapot_hu }}{% endif %}</li>{% endif %}
+                    {% if product.ar %}<li><strong>{% if LANGUAGE_CODE == 'sk' %}Cena{% else %}Ár{% endif %}:</strong> {{ product.ar }} Ft</li>{% endif %} {# Valuta és formázás igény szerint módosítható #}
+                </ul>
+            </div>
+            {% endif %}
+             {# --- ÚJ ADATOK VÉGE --- #}
+
+
+            <div class="detail-columns" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem 3rem; margin-bottom: 3rem;">
+                {% if product.tech_specs.exists %}<div class="tech-specs">
+                    <h3 style="margin-bottom: 1rem; border-bottom: 2px solid var(--primary); padding-bottom: 0.5rem;" data-lang-hu="Műszaki adatok" data-lang-sk="Technické údaje">{% if LANGUAGE_CODE == 'sk' %}Technické údaje{% else %}Műszaki adatok{% endif %}</h3>
+                    <ul style="list-style: none; padding-left: 0; font-size: 0.95rem;">{% for spec in product.tech_specs.all %}<li style="margin-bottom: 0.5rem; padding-left: 1em; text-indent: -1em;" data-lang-hu="• {{ spec.spec_hu }}" data-lang-sk="• {{ spec.spec_sk }}">• {% if LANGUAGE_CODE == 'sk' %}{{ spec.spec_sk }}{% else %}{{ spec.spec_hu }}{% endif %}</li>{% endfor %}</ul>
+                </div>{% endif %}
+                {% if product.features.exists %}<div class="features-section">
+                    <h3 style="margin-bottom: 1rem; border-bottom: 2px solid var(--primary); padding-bottom: 0.5rem;" data-lang-hu="Jellemzők" data-lang-sk="Vlastnosti">{% if LANGUAGE_CODE == 'sk' %}Vlastnosti{% else %}Jellemzők{% endif %}</h3>
+                    <ul style="list-style: none; padding-left: 0; font-size: 0.95rem;">{% for feature in product.features.all %}<li style="margin-bottom: 0.5rem; padding-left: 1em; text-indent: -1em;" data-lang-hu="• {{ feature.feature_hu }}" data-lang-sk="• {{ feature.feature_sk }}">• {% if LANGUAGE_CODE == 'sk' %}{{ feature.feature_sk }}{% else %}{{ feature.feature_hu }}{% endif %}</li>{% endfor %}</ul>
+                </div>{% endif %}
+            </div>
+            <div style="margin-bottom: 2rem;">
+                {% if product.why_choose.exists %}<h4 style="margin-bottom: 1rem; font-size: 1.2rem;" data-lang-hu="Miért válassza ezt a modellt?" data-lang-sk="Prečo si vybrať tento model?">{% if LANGUAGE_CODE == 'sk' %}Prečo si vybrať tento model?{% else %}Miért válassza ezt a modellt?{% endif %}</h4><ul style="list-style: disc; padding-left: 20px; margin-bottom: 1.5rem; font-size: 0.95rem;">{% for reason in product.why_choose.all %}<li style="margin-bottom: 0.5rem;" data-lang-hu="{{ reason.reason_hu }}" data-lang-sk="{{ reason.reason_sk }}">{% if LANGUAGE_CODE == 'sk' %}{{ reason.reason_sk }}{% else %}{{ reason.reason_hu }}{% endif %}</li>{% endfor %}</ul>{% endif %}
+                {% if product.closing_text_hu or product.closing_text_sk %}<p data-lang-hu="{{ product.closing_text_hu }}" data-lang-sk="{{ product.closing_text_sk }}" style="font-size: 0.95rem;">{% if LANGUAGE_CODE == 'sk' %}{{ product.closing_text_sk|default:product.closing_text_hu }}{% else %}{{ product.closing_text_hu|default:product.closing_text_sk }}{% endif %}</p>{% endif %}
+            </div>
+            {% if product.pdf_file %}<div style="text-align: center; margin-top: 2rem;"><a href="{{ product.pdf_file.url }}" class="btn" target="_blank" data-lang-hu="{{ product.pdf_link_text_hu }}" data-lang-sk="{{ product.pdf_link_text_sk }}">{% if LANGUAGE_CODE == 'sk' %}{{ product.pdf_link_text_sk }}{% else %}{{ product.pdf_link_text_hu }}{% endif %}</a></div>{% endif %}
+        </div>
+        {% if product.video_url %}<div class="video-section" style="margin: 3rem 0;">
+            <h4 style="margin-bottom: 1rem; border-bottom: 2px solid var(--primary); padding-bottom: 0.5rem;" data-lang-hu="Videó" data-lang-sk="Video">{% if LANGUAGE_CODE == 'sk' %}Video{% else %}Videó{% endif %}</h4>
+            <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 0 auto;"><iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 4px;" src="{{ product.video_url|safe }}" title="{% if LANGUAGE_CODE == 'sk' %}{{ product.name_sk }}{% else %}{{ product.name_hu }}{% endif %} videó" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+        </div>{% endif %}
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+{# ... marad ugyanaz ... #}
+<script>
+    document.addEventListener('DOMContentLoaded', function () { const swiper = new Swiper('.product-gallery', { loop: true, spaceBetween: 10, navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev', }, pagination: { el: '.swiper-pagination', clickable: true, }, autoHeight: true, }); });
+</script>
+{% endblock %}

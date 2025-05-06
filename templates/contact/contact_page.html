@@ -1,0 +1,585 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if LANGUAGE_CODE == 'sk' %}Kontakt a Projekty{% else %}Kapcsolat és Pályázatok{% endif %} - TUFA MACHINE
+{% endblock %}
+
+{% block extra_css %}
+    <style>
+        /* Általános szekció stílus */
+        .contact-page-section {
+            padding: 3rem 0;
+            background-color: #f9f9f9;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h1 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        .warranty-button-container a.btn {
+        display: block !important;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        }
+      /*
+        .section-title h1:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+       */
+        /* Contact Grid Layout */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 2.5rem;
+        }
+        
+        @media (min-width: 992px) {
+            .contact-grid {
+                grid-template-columns: repeat(2, 1fr);
+                align-items: start;
+            }
+        }
+
+        /* Címek stílusa */
+        .contact-info h2, .map-container h2, .grants-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--primary);
+            color: var(--dark);
+            position: relative;
+        }
+
+        /* Kontakt Infó Doboz */
+        .contact-info-card {
+            background-color: white;
+            padding: 0;
+            border-radius: 8px;
+        }
+        
+        .contact-info p {
+            margin-bottom: 1.2rem;
+            line-height: 1.7;
+            font-size: 1.05rem;
+            color: #555;
+        }
+        
+        .contact-info strong {
+            color: var(--dark);
+            display: block;
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+        }
+        
+        .contact-info a {
+            text-decoration: none;
+            color: var(--primary);
+            transition: all 0.3s ease;
+            font-weight: 500;
+            word-break: break-word;
+        }
+        
+        .contact-info a:hover {
+            text-decoration: underline;
+            color: var(--primary-dark, #e67e22);
+        }
+
+        /* Csapatkép */
+        .team-image-container {
+            text-align: center;
+            margin: 2.5rem 0;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        
+        .team-image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .team-image-container:hover img {
+            transform: scale(1.02);
+        }
+
+        /* Lightbox Styles - NO ANIMATION */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+        }
+        
+        .lightbox-content {
+            margin: 0 auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90vh;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close-lightbox:hover {
+            color: var(--primary);
+        }
+
+        /* Social Ikonok */
+        .social-icons {
+            margin-top: 2rem;
+            text-align: left;
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: #f5f5f5;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .social-icons img {
+            height: 24px;
+            width: 24px;
+            transition: transform 0.2s ease;
+            font-size: 0;
+            color: transparent;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .social-icons a:hover img {
+            filter: brightness(0) invert(1);
+        }
+
+        /* Térkép konténer */
+        .map-container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .map-wrapper {
+            flex-grow: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            position: relative;
+            min-height: 450px;
+        }
+        
+        .map-container iframe {
+            border: none;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 10px;
+        }
+
+        /* Pályázatok Szekció */
+        .grants-section {
+            padding: 4rem 0;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-top: 2rem;
+        }
+        
+        .grants-section .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .grants-section .section-title h2 {
+            font-size: 2.2rem;
+            border-bottom: none;
+            display: inline-block;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        /*
+        .grants-section .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        */
+        .grant-logos {
+            text-align: center;
+            margin-bottom: 3rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .grant-logos img {
+            max-height: 80px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+        
+        .grant-logos img:hover {
+            transform: scale(1.05);
+        }
+        
+        .grants-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            padding: 0 1.5rem;
+        }
+        
+        @media (min-width: 992px) {
+            .grants-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .grant-item {
+            background-color: #f9f9f9;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary);
+            transition: transform 0.3s ease;
+        }
+        
+        .grant-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .grant-item h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1.2rem;
+            color: var(--dark);
+            line-height: 1.4;
+        }
+        
+        .grant-item p {
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .grant-item strong {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        /* Responsive fixes */
+        @media (max-width: 768px) {
+            .section-title h1 {
+                font-size: 2rem;
+            }
+            
+            .contact-grid, .grants-container {
+                padding: 1.5rem;
+            }
+            
+            .grant-item {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+<section class="contact-page-section">
+    <div class="container">
+        <div class="section-title">
+            <h1 data-lang-hu="Kapcsolat" data-lang-sk="Kontakt">Kapcsolat</h1>
+        </div>
+
+        <div class="contact-grid">
+            <!-- Bal oszlop: Infók -->
+            <div class="contact-info">
+                <h2 data-lang-hu="Elérhetőségeink" data-lang-sk="Naše kontaktné údaje">Elérhetőségeink</h2>
+
+                <div class="contact-info-card">
+                    <!-- Magyar verzió -->
+                    <div class="lang-hu">
+                        <p><strong>Tufa Machine</strong><br>Keszel Csaba ev.<br>Adószám: 60865276-2-39</p>
+                        <p><strong>Telephelyünk címe:</strong> 8409, Úrkút, külterület hrsz. 0133/1 (Béke utca)</p>
+                        <div class="team-image-container">
+                            <img src="{% static 'images/team.jpg' %}" alt="Tufa Machine Csapat" class="lightbox-trigger">
+                        </div>
+                        <p><strong>Kapcsolattartók:</strong>
+                            <span class="contact-person">Dallos Noémi: <a href="tel:+36317808601">+36 31 780 8601</a></span><br>
+                            <span class="contact-person">Kőhegyi Tamás: <a href="tel:+36709042948">+36 70 904 2948</a></span><br>
+                            <span class="contact-person">Keszel Csaba: <a href="tel:+36209442727">+36 20 944 2727</a></span>
+                        </p>
+                        <p><strong>Email:</strong> <a href="mailto:info@tufa.hu">info@tufa.hu</a></p>
+                        <p><strong>Nyitvatartás:</strong> H-P 8:00-16:00</p>
+                    </div>
+                    
+                    <!-- Szlovák verzió -->
+                    <div class="lang-sk">
+                        <p><strong>Tufa Machine (Tufa S.r.o)</strong></p>
+                        <p><strong>Adresa prevádzky:</strong> Nárad 564, 930 06 Nárad</p>
+                        <div class="team-image-container">
+                            <img src="{% static 'images/team.jpg' %}" alt="Tufa Machine Csapat" class="lightbox-trigger">
+                        </div>
+                        <p><strong>Kontaktné osoby:</strong>
+                            <span class="contact-person">Lelkes Béla: <a href="tel:+421917300313">+421 917 300 313</a></span>
+                        </p>
+                        <p><strong>Email:</strong> <a href="mailto:info@tufa.sk">info@tufa.sk</a></p>
+                        <p><strong>Otváracie hodiny:</strong> Po-Pi 8:00-16:00, So 9:00-12:00</p>
+                    </div>
+                    
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/tufamachinehu" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><img src="{% static 'images/facebook.png' %}" alt=""></a>
+                        <a href="https://www.tiktok.com/@tufamachine" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><img src="{% static 'images/tiktok.png' %}" alt=""></a>
+                        <a href="https://www.instagram.com/tufamachine/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img src="{% static 'images/insta.png' %}" alt=""></a>
+                        <a href="https://www.youtube.com/@tufamaximus" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><img src="{% static 'images/yt.png' %}" alt=""></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jobb oszlop: Térkép -->
+            <div class="map-container">
+                <h2 data-lang-hu="Térkép" data-lang-sk="Mapa">Térkép</h2>
+                <div class="map-wrapper">
+                    <!-- Magyar térkép -->
+                    <div class="lang-hu">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d35520.991133539756!2d17.634640468400345!3d47.07015451586864!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4769a2dd5140feb7%3A0xd05f8eb10f3e231!2sTufa%20Machine!5e0!3m2!1shu!2es!4v1745345519929!5m2!1shu!2es"
+                            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    
+                    <!-- Szlovák térkép -->
+                    <div class="lang-sk">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d5356.8587070906215!2d17.620165!3d47.831275!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476b97edbc61f4c5%3A0x317d6816f99e8cd7!2sTufa%20Machine%20(%20Tufa%20S.r.o)!5e0!3m2!1shu!2hu!4v1746125837639!5m2!1shu!2hu"
+                            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- contact-grid vége -->
+
+<div class="text-center mt-4 warranty-button-container">
+    <!-- Magyar gomb - csak magyar nyelv esetén jelenik meg -->
+    <div class="lang-hu">
+        <a href="{% url 'contact:warranty' %}" class="btn btn-warning btn-lg d-inline-block mx-auto">
+            <i class="fas fa-file-contract mr-2"></i> Garanciális megállapodás
+        </a>
+    </div>
+    
+    <!-- Szlovák gomb - csak szlovák nyelv esetén jelenik meg -->
+    <div class="lang-sk">
+        <a href="{% url 'contact:warranty' %}" class="btn btn-warning btn-lg d-inline-block mx-auto">
+            <i class="fas fa-file-contract mr-2"></i> Garančná dohoda
+        </a>
+    </div>
+</div>
+
+        <!-- Lightbox Container -->
+        <div id="lightbox" class="lightbox">
+            <span class="close-lightbox">&times;</span>
+            <img class="lightbox-content" id="expanded-image">
+        </div>
+
+        <!-- PÁLYÁZATOK SZEKCIÓ -->
+        <section class="grants-section">
+            <div class="section-title">
+                <h2 data-lang-hu="Pályázataink" data-lang-sk="Naše Granty">Pályázataink</h2>
+            </div>
+            <div class="grant-logos">
+                <!-- logók -->
+            </div>
+            <div class="grants-container">
+                <div class="grant-item">
+                    <h3 data-lang-hu="GINOP-1.2.9-20 - Hátrányos helyzetű településeken működő mikro- és kisvállalkozások fejlesztéseinek támogatása" 
+                        data-lang-sk="GINOP-1.2.9-20 - Podpora rozvoja mikropodnikov a malých podnikov pôsobiacich v znevýhodnených obciach">
+                        GINOP-1.2.9-20 - Hátrányos helyzetű településeken működő mikro- és kisvállalkozások fejlesztéseinek támogatása
+                    </h3>
+                    <p>
+                        <strong data-lang-hu="Projekt azonosító száma:" data-lang-sk="Identifikačné číslo projektu:">Projekt azonosító száma:</strong> GINOP-1.2.9-20-2021-05285
+                    </p>
+                    <p>
+                        <strong data-lang-hu="Kedvezményezett neve:" data-lang-sk="Názov príjemcu:">Kedvezményezett neve:</strong> Keszel Csaba egyéni vállalkozó
+                    </p>
+                    <p>
+                        <strong data-lang-hu="Támogatás összege:" data-lang-sk="Výška podpory:">Támogatás összege:</strong> 9.835.518 Ft
+                    </p>
+                    <p>
+                        <strong data-lang-hu="Támogatás mértéke:" data-lang-sk="Miera podpory:">Támogatás mértéke:</strong> 70 %
+                    </p>
+                    <p>
+                        <strong data-lang-hu="Projekt leírása:" data-lang-sk="Popis projektu:">Projekt leírása:</strong>
+                        <span data-lang-hu="Technológiai fejlődést eredményező eszközbeszerzés Tótvázsonyban" data-lang-sk="Obstaranie zariadení na technologický rozvoj v obci Tótvázsony">
+                            Technológiai fejlődést eredményező eszközbeszerzés Tótvázsonyban
+                        </span>
+                    </p>
+                    <p>
+                        <strong data-lang-hu="Projekt befejezési dátuma:" data-lang-sk="Dátum ukončenia projektu:">Projekt befejezési dátuma:</strong> 2023.03.31.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Lightbox functionality
+        const lightbox = document.getElementById('lightbox');
+        const expandedImg = document.getElementById('expanded-image');
+        const closeBtn = document.querySelector('.close-lightbox');
+        const triggers = document.querySelectorAll('.lightbox-trigger');
+        
+        // Open lightbox when clicking on an image
+        triggers.forEach(trigger => {
+            trigger.addEventListener('click', function() {
+                expandedImg.src = this.src;
+                lightbox.style.display = 'block';
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when lightbox is open
+            });
+        });
+        
+        // Close lightbox when clicking the close button
+        closeBtn.addEventListener('click', function() {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        });
+        
+        // Close lightbox when clicking outside the image
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && lightbox.style.display === 'block') {
+                lightbox.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Ez a script a nyelvi váltáshoz
+        function handleLanguageChange() {
+            // Ellenőrizzük, hogy melyik nyelv van kiválasztva
+            const isHungarian = document.documentElement.lang === 'hu';
+            const isSlovak = document.documentElement.lang === 'sk';
+            
+            // Elrejtjük mindkét nyelvi verziót
+            document.querySelectorAll('.lang-hu, .lang-sk').forEach(elem => {
+                elem.style.display = 'none';
+            });
+            
+            // Megjelenítjük a megfelelő nyelvi verziót
+            if (isSlovak) {
+                document.querySelectorAll('.lang-sk').forEach(elem => {
+                    elem.style.display = 'block';
+                });
+                
+                // Frissítjük az adatattribútumokat
+                document.querySelectorAll('[data-lang-sk]').forEach(elem => {
+                    if (elem.tagName === 'INPUT' || elem.tagName === 'TEXTAREA') {
+                        elem.placeholder = elem.getAttribute('data-lang-sk');
+                    } else {
+                        elem.textContent = elem.getAttribute('data-lang-sk');
+                    }
+                });
+            } else {
+                // Alapértelmezés szerint magyar
+                document.querySelectorAll('.lang-hu').forEach(elem => {
+                    elem.style.display = 'block';
+                });
+                
+                // Frissítjük az adatattribútumokat
+                document.querySelectorAll('[data-lang-hu]').forEach(elem => {
+                    if (elem.tagName === 'INPUT' || elem.tagName === 'TEXTAREA') {
+                        elem.placeholder = elem.getAttribute('data-lang-hu');
+                    } else {
+                        elem.textContent = elem.getAttribute('data-lang-hu');
+                    }
+                });
+            }
+        }
+        
+        // Kezdeti nyelvi beállítás
+        handleLanguageChange();
+        
+        // Figyeljük a nyelvi váltást (feltételezve, hogy van egy nyelvváltó gomb)
+        document.querySelectorAll('.language-switcher').forEach(button => {
+            button.addEventListener('click', function() {
+                // Feltételezzük, hogy a nyelvi váltás valamilyen módon frissíti a html.lang attribútumot
+                setTimeout(handleLanguageChange, 100); // Kis késleltetés a nyelvi váltás után
+            });
+        });
+        
+        // Ha a base.html oldalon már van nyelvváltás, akkor figyelni kell az események propagációját
+        // Ez biztosítja, hogy a kontakt oldal is reagáljon a nyelvváltásra
+        const languageObserver = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'lang') {
+                    handleLanguageChange();
+                }
+            });
+        });
+        
+        languageObserver.observe(document.documentElement, { attributes: true });
+    });
+</script>
+{% endblock %}

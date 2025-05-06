@@ -1,0 +1,72 @@
+[2025-04-28 16:22:09 +0000] [40911] [INFO] Starting gunicorn 23.0.0
+[2025-04-28 16:22:09 +0000] [40911] [INFO] Listening at: unix:/tmp/tufatest.sock (40911)
+[2025-04-28 16:22:09 +0000] [40911] [INFO] Using worker: sync
+[2025-04-28 16:22:09 +0000] [40912] [INFO] Booting worker with pid: 40912
+[2025-04-28 16:22:09 +0000] [40913] [INFO] Booting worker with pid: 40913
+[2025-04-28 16:22:09 +0000] [40914] [INFO] Booting worker with pid: 40914
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /wordpress/wp-admin/setup-config.php
+Not Found: /wp-admin/setup-config.php
+Not Found: /wp-admin/setup-config.php
+Not Found: /wordpress/wp-admin/setup-config.php
+Not Found: /wordpress/wp-admin/setup-config.php
+Not Found: /wordpress/wp-admin/setup-config.php
+Not Found: /wp-admin/setup-config.php
+Not Found: /wp-admin/setup-config.php
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /sw.js
+Not Found: /wp-admin/setup-config.php
+Not Found: /wordpress/wp-admin/setup-config.php
+Not Found: /wp-admin/setup-config.php
+Not Found: /wordpress/wp-admin/setup-config.php
+[2025-04-28 19:19:02 +0000] [40911] [ERROR] Worker (pid:40912) was sent SIGHUP!
+[2025-04-28 19:19:02 +0000] [40911] [ERROR] Worker (pid:40913) was sent SIGHUP!
+[2025-04-28 19:19:02 +0000] [40911] [ERROR] Worker (pid:40914) was sent SIGHUP!
+[2025-04-28 19:19:02 +0000] [43256] [INFO] Booting worker with pid: 43256
+[2025-04-28 19:19:02 +0000] [43257] [INFO] Booting worker with pid: 43257
+[2025-04-28 19:19:02 +0000] [43258] [INFO] Booting worker with pid: 43258
+[2025-04-28 19:19:02 +0000] [40911] [INFO] Handling signal: hup
+[2025-04-28 19:19:02 +0000] [40911] [INFO] Hang up: Master
+[2025-04-28 19:19:02 +0000] [43259] [INFO] Booting worker with pid: 43259
+[2025-04-28 19:19:02 +0000] [43260] [INFO] Booting worker with pid: 43260
+[2025-04-28 19:19:02 +0000] [43261] [INFO] Booting worker with pid: 43261
+[2025-04-28 19:19:03 +0000] [43256] [INFO] Worker exiting (pid: 43256)
+[2025-04-28 19:19:03 +0000] [43257] [INFO] Worker exiting (pid: 43257)
+[2025-04-28 19:19:03 +0000] [43258] [INFO] Worker exiting (pid: 43258)
+[2025-04-28 19:19:03 +0000] [40911] [ERROR] Worker (pid:43257) was sent SIGTERM!
+[2025-04-28 19:19:03 +0000] [40911] [ERROR] Worker (pid:43258) was sent SIGTERM!
+[2025-04-28 19:19:03 +0000] [40911] [ERROR] Worker (pid:43256) was sent SIGTERM!

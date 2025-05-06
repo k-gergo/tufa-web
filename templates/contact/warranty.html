@@ -1,0 +1,320 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if LANGUAGE_CODE == 'sk' %}Garančné podmienky - TUFA MACHINE{% else %}Garanciális feltételek - TUFA MACHINE{% endif %}
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .warranty-page-section {
+        padding: 3rem 0;
+        background-color: #f9f9f9;
+    }
+    
+    .section-title {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+    
+    .section-title h1 {
+        font-size: 2.5rem;
+        color: var(--dark);
+        position: relative;
+        display: inline-block;
+        padding-bottom: 10px;
+    }
+    
+    .warranty-container {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        padding: 2.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .warranty-header {
+        
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+        color: #333;
+        /* border-bottom: 5px solid #ff8c00; /* Vastagabb narancssárga vonal */
+    }
+    
+    .warranty-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 0;
+    }
+    
+    .warranty-section {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .warranty-section h2 {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+        color: var(--dark);
+        border-bottom: 2px solid #ff8c00; /* Narancssárga vonal a szekció címeknél */
+        padding-bottom: 0.5rem;
+        display: inline-block;
+    }
+    
+    .warranty-section p {
+        margin-bottom: 1rem;
+        line-height: 1.7;
+        color: #555;
+    }
+    
+    .warranty-list {
+        list-style-type: disc;
+        padding-left: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .warranty-list-item {
+        margin-bottom: 0.8rem;
+        line-height: 1.7;
+    }
+    
+    .contact-email {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #333;
+        text-align: center;
+        padding: 0.5rem 1rem;
+        margin: 1rem 0;
+        display: inline-block;
+        border-bottom: 2px solid #333;
+    }
+    
+    @media (max-width: 768px) {
+        .section-title h1 {
+            font-size: 2rem;
+        }
+        
+        .warranty-container {
+            padding: 1.5rem;
+        }
+        
+        .warranty-title {
+            font-size: 1.5rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="warranty-page-section">
+    <div class="container">
+        <div class="section-title">
+            <h1 data-lang-hu="Garanciális feltételek" data-lang-sk="Garančné podmienky">
+                {% if LANGUAGE_CODE == 'sk' %}Garančné podmienky{% else %}Garanciális feltételek{% endif %}
+            </h1>
+        </div>
+
+        <div class="warranty-container">
+            <div class="warranty-header">
+                <h2 class="warranty-title" data-lang-hu="Garanciális megállapodás új termék vásárlása esetén:" data-lang-sk="Garančná dohoda pri kúpe nového výrobku:">
+                    {% if LANGUAGE_CODE == 'sk' %}Garančná dohoda pri kúpe nového výrobku{% else %}Garanciális megállapodás új termék vásárlása esetén{% endif %}
+                </h2>
+            </div>
+
+            <!-- Bevezetés -->
+            <div class="warranty-section">
+                <h2 data-lang-hu="Bevezetés" data-lang-sk="Úvod">
+                    {% if LANGUAGE_CODE == 'sk' %}Úvod{% else %}Bevezetés{% endif %}
+                </h2>
+                <p data-lang-hu="A megállapodás létrejött egyrészről Keszei Csaba e.v., székhelye: 8409, Úrkút, Béke u. 0133/1hrsz, adószáma: 60865276-2-39 (a továbbiakban: Eladó), másrészről a Vevő között, a következő feltételekkel." 
+                   data-lang-sk="Dohoda bola uzavretá medzi Csaba Keszei e.v., so sídlom: 8409, Úrkút, Béke u. 0133/1hrsz, daňové číslo: 60865276-2-39 (ďalej len: Predávajúci) na jednej strane a Kupujúcim na strane druhej, za nasledujúcich podmienok.">
+                    {% if LANGUAGE_CODE == 'sk' %}Dohoda bola uzavretá medzi Csaba Keszei e.v., so sídlom: 8409, Úrkút, Béke u. 0133/1hrsz, daňové číslo: 60865276-2-39 (ďalej len: Predávajúci) na jednej strane a Kupujúcim na strane druhej, za nasledujúcich podmienok.{% else %}A megállapodás létrejött egyrészről Keszei Csaba e.v., székhelye: 8409, Úrkút, Béke u. 0133/1hrsz, adószáma: 60865276-2-39 (a továbbiakban: Eladó), másrészről a Vevő között, a következő feltételekkel.{% endif %}
+                </p>
+            </div>
+
+            <!-- A megállapodás tárgya -->
+            <div class="warranty-section">
+                <h2 data-lang-hu="A megállapodás tárgya" data-lang-sk="Predmet dohody">
+                    {% if LANGUAGE_CODE == 'sk' %}Predmet dohody{% else %}A megállapodás tárgya{% endif %}
+                </h2>
+                <p data-lang-hu="Az Eladó eladja, a Vevő megvásárolja az eladó által kiállított számlán szereplő új földmunkagépet és/vagy kiegészítőt." 
+                   data-lang-sk="Predávajúci predáva a Kupujúci kupuje nový zemný stroj a/alebo príslušenstvo uvedené na faktúre vystavenej predávajúcim.">
+                    {% if LANGUAGE_CODE == 'sk' %}Predávajúci predáva a Kupujúci kupuje nový zemný stroj a/alebo príslušenstvo uvedené na faktúre vystavenej predávajúcim.{% else %}Az Eladó eladja, a Vevő megvásárolja az eladó által kiállított számlán szereplő új földmunkagépet és/vagy kiegészítőt.{% endif %}
+                </p>
+            </div>
+
+            <!-- Garancia időtartama -->
+            <div class="warranty-section">
+                <h2 data-lang-hu="Garancia időtartama" data-lang-sk="Trvanie záruky">
+                    {% if LANGUAGE_CODE == 'sk' %}Trvanie záruky{% else %}Garancia időtartama{% endif %}
+                </h2>
+                <p data-lang-hu="Az Eladó a termékre 12 hónap garanciát vállal, amelyet a számla kiállításának napjától kell számolni. Ez alól kivételt képeznek az eladó által értékesített gumiláncok melyekre 12 hónap vagy 1000 üzemóra (amelyik előbb bekövetkezik) vállal." 
+                   data-lang-sk="Predávajúci poskytuje na výrobok záruku 12 mesiacov, ktorá sa počíta odo dňa vystavenia faktúry. Výnimkou sú gumové pásy predávané predávajúcim, na ktoré sa poskytuje záruka 12 mesiacov alebo 1000 prevádzkových hodín (podľa toho, čo nastane skôr).">
+                    {% if LANGUAGE_CODE == 'sk' %}Predávajúci poskytuje na výrobok záruku 12 mesiacov, ktorá sa počíta odo dňa vystavenia faktúry. Výnimkou sú gumové pásy predávané predávajúcim, na ktoré sa poskytuje záruka 12 mesiacov alebo 1000 prevádzkových hodín (podľa toho, čo nastane skôr).{% else %}Az Eladó a termékre 12 hónap garanciát vállal, amelyet a számla kiállításának napjától kell számolni. Ez alól kivételt képeznek az eladó által értékesített gumiláncok melyekre 12 hónap vagy 1000 üzemóra (amelyik előbb bekövetkezik) vállal.{% endif %}
+                </p>
+            </div>
+
+            <!-- Garancia feltételei -->
+            <div class="warranty-section">
+                <h2 data-lang-hu="Garancia feltételei" data-lang-sk="Podmienky záruky">
+                    {% if LANGUAGE_CODE == 'sk' %}Podmienky záruky{% else %}Garancia feltételei{% endif %}
+                </h2>
+                <p data-lang-hu="A garancia érvényesítésének feltételei:" 
+                   data-lang-sk="Podmienky uplatnenia záruky:">
+                    {% if LANGUAGE_CODE == 'sk' %}Podmienky uplatnenia záruky:{% else %}A garancia érvényesítésének feltételei:{% endif %}
+                </p>
+                <ul class="warranty-list">
+                    <li class="warranty-list-item" data-lang-hu="A terméket rendeltetésszerűen használták és karbantartották." 
+                        data-lang-sk="Výrobok bol používaný a udržiavaný v súlade s jeho určením.">
+                        {% if LANGUAGE_CODE == 'sk' %}Výrobok bol používaný a udržiavaný v súlade s jeho určením.{% else %}A terméket rendeltetésszerűen használták és karbantartották.{% endif %}
+                    </li>
+                    <li class="warranty-list-item" data-lang-hu="A Vevő betartotta a gyártó által előírt karbantartási és üzemeltetési utasításokat." 
+                        data-lang-sk="Kupujúci dodržiaval pokyny výrobcu pre údržbu a prevádzku.">
+                        {% if LANGUAGE_CODE == 'sk' %}Kupujúci dodržiaval pokyny výrobcu pre údržbu a prevádzku.{% else %}A Vevő betartotta a gyártó által előírt karbantartási és üzemeltetési utasításokat.{% endif %}
+                    </li>
+                    <li class="warranty-list-item" data-lang-hu="A terméken nem végeztek jogosulatlan módosításokat vagy javításokat. Jogosulatlan módosításnak és javításnak minősül minden olyan típusú javítás és módosítás melyhez az eladó nem adta írásos hozzájárulását!" 
+                        data-lang-sk="Na výrobku neboli vykonané neoprávnené úpravy alebo opravy. Za neoprávnenú úpravu a opravu sa považuje každý typ opravy a úpravy, ku ktorej predávajúci nedal písomný súhlas!">
+                        {% if LANGUAGE_CODE == 'sk' %}Na výrobku neboli vykonané neoprávnené úpravy alebo opravy. Za neoprávnenú úpravu a opravu sa považuje každý typ opravy a úpravy, ku ktorej predávajúci nedal písomný súhlas!{% else %}A terméken nem végeztek jogosulatlan módosításokat vagy javításokat. Jogosulatlan módosításnak és javításnak minősül minden olyan típusú javítás és módosítás melyhez az eladó nem adta írásos hozzájárulását!{% endif %}
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Garanciális igény bejelentése -->
+            <div class="warranty-section">
+                <h2 data-lang-hu="Garanciális igény bejelentése" data-lang-sk="Nahlásenie záručnej reklamácie">
+                    {% if LANGUAGE_CODE == 'sk' %}Nahlásenie záručnej reklamácie{% else %}Garanciális igény bejelentése{% endif %}
+                </h2>
+                <p data-lang-hu="A Vevő köteles a hiba észlelését követően haladéktalanul, de legkésőbb 1 munkanapon belül írásban értesíteni az Eladót a hibáról, részletesen leírva, fotókkal/videóval bizonyítva annak jellegét és körülményeit, melyet a következő email címre küldhet meg:" 
+                   data-lang-sk="Kupujúci je povinný bezodkladne, najneskôr však do 1 pracovného dňa od zistenia vady, písomne informovať Predávajúceho o vade, podrobne ju opísať, doložiť fotografiami/videom preukazujúcimi jej povahu a okolnosti, ktoré môže zaslať na nasledujúcu e-mailovú adresu:">
+                    {% if LANGUAGE_CODE == 'sk' %}Kupujúci je povinný bezodkladne, najneskôr však do 1 pracovného dňa od zistenia vady, písomne informovať Predávajúceho o vade, podrobne ju opísať, doložiť fotografiami/videom preukazujúcimi jej povahu a okolnosti, ktoré môže zaslať na nasledujúcu e-mailovú adresu:{% else %}A Vevő köteles a hiba észlelését követően haladéktalanul, de legkésőbb 1 munkanapon belül írásban értesíteni az Eladót a hibáról, részletesen leírva, fotókkal/videóval bizonyítva annak jellegét és körülményeit, melyet a következő email címre küldhet meg:{% endif %}
+                </p>
+                <div class="text-center my-4">
+                    <h3 class="contact-email">info@tufa.hu</h3>
+                </div>
+            </div>
+
+            <!-- Eladó kötelezettségei -->
+            <div class="warranty-section">
+                <h2 data-lang-hu="Eladó kötelezettségei" data-lang-sk="Povinnosti predávajúceho">
+                    {% if LANGUAGE_CODE == 'sk' %}Povinnosti predávajúceho{% else %}Eladó kötelezettségei{% endif %}
+                </h2>
+                <p data-lang-hu="Az Eladó vállalja, hogy a garanciális időszak alatt felmerülő, rendeltetésszerű használat mellett bekövetkező hibákat saját költségén 30 napon belül kijavítja/ javíttatja. Amennyiben a javítás 30 napon belül nem lehetséges, abban az esetben az eladó vállalja a termék cseréjét." 
+                   data-lang-sk="Predávajúci sa zaväzuje, že závady, ktoré sa vyskytnú počas záručnej doby pri bežnom používaní, opraví/dá opraviť na vlastné náklady do 30 dní. Ak oprava nie je možná do 30 dní, predávajúci sa zaväzuje výrobok vymeniť.">
+                    {% if LANGUAGE_CODE == 'sk' %}Predávajúci sa zaväzuje, že závady, ktoré sa vyskytnú počas záručnej doby pri bežnom používaní, opraví/dá opraviť na vlastné náklady do 30 dní. Ak oprava nie je možná do 30 dní, predávajúci sa zaväzuje výrobok vymeniť.{% else %}Az Eladó vállalja, hogy a garanciális időszak alatt felmerülő, rendeltetésszerű használat mellett bekövetkező hibákat saját költségén 30 napon belül kijavítja/ javíttatja. Amennyiben a javítás 30 napon belül nem lehetséges, abban az esetben az eladó vállalja a termék cseréjét.{% endif %}
+                </p>
+                <p data-lang-hu="A javítás helyszíne minden esetben az eladó telephelye: 8409, Úrkút, Béke u. 0133/1hrsz. A javításra szoruló termék javításra szállítása és a javítás utáni elszállítás a vevő feladata!" 
+                   data-lang-sk="Miestom opravy je vo všetkých prípadoch sídlo predávajúceho: 8409, Úrkút, Béke u. 0133/1hrsz. Prepravu výrobku, ktorý potrebuje opravu, na miesto opravy a prepravu po oprave zabezpečuje kupujúci!">
+                    {% if LANGUAGE_CODE == 'sk' %}Miestom opravy je vo všetkých prípadoch sídlo predávajúceho: 8409, Úrkút, Béke u. 0133/1hrsz. Prepravu výrobku, ktorý potrebuje opravu, na miesto opravy a prepravu po oprave zabezpečuje kupujúci!{% else %}A javítás helyszíne minden esetben az eladó telephelye: 8409, Úrkút, Béke u. 0133/1hrsz. A javításra szoruló termék javításra szállítása és a javítás utáni elszállítás a vevő feladata!{% endif %}
+                </p>
+                <p data-lang-hu="Az eladó vállalja az általa forgalmazott termékhez pótalkatrészt és a javításhoz szükséges szakembert biztosítja, továbbá mindent elkövet, hogy a javítási munkálatok minél rövidebb időt vegyenek igénybe. A garancia ideje a javítás időtartamával meghosszabbodik!" 
+                   data-lang-sk="Predávajúci sa zaväzuje, že zabezpečí náhradné diely pre výrobok, ktorý predáva, a poskytne odborníka potrebného na opravu, a urobí všetko pre to, aby opravy trvali čo najkratšie. Záručná doba sa predlžuje o dobu trvania opravy!">
+                    {% if LANGUAGE_CODE == 'sk' %}Predávajúci sa zaväzuje, že zabezpečí náhradné diely pre výrobok, ktorý predáva, a poskytne odborníka potrebného na opravu, a urobí všetko pre to, aby opravy trvali čo najkratšie. Záručná doba sa predlžuje o dobu trvania opravy!{% else %}Az eladó vállalja az általa forgalmazott termékhez pótalkatrészt és a javításhoz szükséges szakembert biztosítja, továbbá mindent elkövet, hogy a javítási munkálatok minél rövidebb időt vegyenek igénybe. A garancia ideje a javítás időtartamával meghosszabbodik!{% endif %}
+                </p>
+            </div>
+
+            <!-- Kizárások -->
+            <div class="warranty-section">
+                <h2 data-lang-hu="Kizárások" data-lang-sk="Výluky">
+                    {% if LANGUAGE_CODE == 'sk' %}Výluky{% else %}Kizárások{% endif %}
+                </h2>
+                <p data-lang-hu="A garancia nem terjed ki az alábbi esetekre:" 
+                   data-lang-sk="Záruka sa nevzťahuje na nasledujúce prípady:">
+                    {% if LANGUAGE_CODE == 'sk' %}Záruka sa nevzťahuje na nasledujúce prípady:{% else %}A garancia nem terjed ki az alábbi esetekre:{% endif %}
+                </p>
+                <ul class="warranty-list">
+                    <li class="warranty-list-item" data-lang-hu="Normál kopás és elhasználódás." 
+                        data-lang-sk="Bežné opotrebenie a opotrebovanie.">
+                        {% if LANGUAGE_CODE == 'sk' %}Bežné opotrebenie a opotrebovanie.{% else %}Normál kopás és elhasználódás.{% endif %}
+                    </li>
+                    <li class="warranty-list-item" data-lang-hu="Helytelen használatból vagy karbantartás hiányából eredő károk." 
+                        data-lang-sk="Škody vyplývajúce z nesprávneho používania alebo nedostatočnej údržby.">
+                        {% if LANGUAGE_CODE == 'sk' %}Škody vyplývajúce z nesprávneho používania alebo nedostatočnej údržby.{% else %}Helytelen használatból vagy karbantartás hiányából eredő károk.{% endif %}
+                    </li>
+                    <li class="warranty-list-item" data-lang-hu="Természeti katasztrófák, balesetek vagy egyéb külső behatások okozta sérülések." 
+                        data-lang-sk="Poškodenia spôsobené prírodnými katastrofami, nehodami alebo inými vonkajšími vplyvmi.">
+                        {% if LANGUAGE_CODE == 'sk' %}Poškodenia spôsobené prírodnými katastrofami, nehodami alebo inými vonkajšími vplyvmi.{% else %}Természeti katasztrófák, balesetek vagy egyéb külső behatások okozta sérülések.{% endif %}
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Egyéb rendelkezések -->
+            <div class="warranty-section">
+                <h2 data-lang-hu="Egyéb rendelkezések" data-lang-sk="Ostatné ustanovenia">
+                    {% if LANGUAGE_CODE == 'sk' %}Ostatné ustanovenia{% else %}Egyéb rendelkezések{% endif %}
+                </h2>
+                <p data-lang-hu="A vevő az eladóval szemben nem támaszthat kötbér jellegű igényt! Ez alól kivételt képez az egyéni írásbeli szerződéses megállapodás!" 
+                   data-lang-sk="Kupujúci si nemôže voči predávajúcemu uplatniť nárok na zmluvnú pokutu! Výnimkou je individuálna písomná zmluvná dohoda!">
+                    {% if LANGUAGE_CODE == 'sk' %}Kupujúci si nemôže voči predávajúcemu uplatniť nárok na zmluvnú pokutu! Výnimkou je individuálna písomná zmluvná dohoda!{% else %}A vevő az eladóval szemben nem támaszthat kötbér jellegű igényt! Ez alól kivételt képez az egyéni írásbeli szerződéses megállapodás!{% endif %}
+                </p>
+                <p data-lang-hu="Amennyiben a hiba keletkezésének körülményei nem egyértelműen bizonyíthatóak, úgy külső szakértő bevonására kerül sor. Garanciális hiba esetén a szakértői vélemény minden költsége az eladót terheli, ellenben ha bebizonyosodik, hogy a hiba a vevő mulasztásából/hibájából lépett fel, abban az esetben, minden ezzel járó költséget a vevő köteles fizetni." 
+                   data-lang-sk="Ak okolnosti vzniku poruchy nie je možné jednoznačne preukázať, bude prizvaný externý znalec. V prípade záručnej chyby hradia všetky náklady na znalecký posudok predávajúci, ale ak sa preukáže, že chyba vznikla v dôsledku zanedbania/chyby kupujúceho, všetky súvisiace náklady hradí kupujúci.">
+                    {% if LANGUAGE_CODE == 'sk' %}Ak okolnosti vzniku poruchy nie je možné jednoznačne preukázať, bude prizvaný externý znalec. V prípade záručnej chyby hradia všetky náklady na znalecký posudok predávajúci, ale ak sa preukáže, že chyba vznikla v dôsledku zanedbania/chyby kupujúceho, všetky súvisiace náklady hradí kupujúci.{% else %}Amennyiben a hiba keletkezésének körülményei nem egyértelműen bizonyíthatóak, úgy külső szakértő bevonására kerül sor. Garanciális hiba esetén a szakértői vélemény minden költsége az eladót terheli, ellenben ha bebizonyosodik, hogy a hiba a vevő mulasztásából/hibájából lépett fel, abban az esetben, minden ezzel járó költséget a vevő köteles fizetni.{% endif %}
+                </p>
+                <p data-lang-hu="A jelen megállapodásban nem szabályozott kérdésekben a Polgári Törvénykönyv és a vonatkozó magyar jogszabályok rendelkezései az irányadók." 
+                   data-lang-sk="V otázkach neupravených v tejto dohode sa uplatňujú ustanovenia Občianskeho zákonníka a príslušných maďarských právnych predpisov.">
+                    {% if LANGUAGE_CODE == 'sk' %}V otázkach neupravených v tejto dohode sa uplatňujú ustanovenia Občianskeho zákonníka a príslušných maďarských právnych predpisov.{% else %}A jelen megállapodásban nem szabályozott kérdésekben a Polgári Törvénykönyv és a vonatkozó magyar jogszabályok rendelkezései az irányadók.{% endif %}
+                </p>
+            </div>
+
+            <!-- Záradék -->
+            <div class="warranty-section" style="border-bottom: none;">
+                <h2 data-lang-hu="Záradék" data-lang-sk="Záverečné ustanovenie">
+                    {% if LANGUAGE_CODE == 'sk' %}Záverečné ustanovenie{% else %}Záradék{% endif %}
+                </h2>
+                <p data-lang-hu="A vevő az eladó által kiállított számla kiegyenlítésével kijelenti, hogy a jelen megállapodást elolvasta, megértette és maradéktalanul elfogadja." 
+                   data-lang-sk="Kupujúci úhradou faktúry vystavenej predávajúcim vyhlasuje, že si túto dohodu prečítal, porozumel jej a bezvýhradne ju akceptuje.">
+                    {% if LANGUAGE_CODE == 'sk' %}Kupujúci úhradou faktúry vystavenej predávajúcim vyhlasuje, že si túto dohodu prečítal, porozumel jej a bezvýhradne ju akceptuje.{% else %}A vevő az eladó által kiállított számla kiegyenlítésével kijelenti, hogy a jelen megállapodást elolvasta, megértette és maradéktalanul elfogadja.{% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Ez a script a nyelvi váltáshoz
+        function handleLanguageChange() {
+            // Ellenőrizzük, hogy melyik nyelv van kiválasztva
+            const isHungarian = document.documentElement.lang === 'hu';
+            const isSlovak = document.documentElement.lang === 'sk';
+            
+            // Frissítjük az adatattribútumokat
+            if (isSlovak) {
+                // Frissítjük az adatattribútumokat
+                document.querySelectorAll('[data-lang-sk]').forEach(elem => {
+                    if (elem.tagName === 'INPUT' || elem.tagName === 'TEXTAREA') {
+                        elem.placeholder = elem.getAttribute('data-lang-sk');
+                    } else {
+                        elem.textContent = elem.getAttribute('data-lang-sk');
+                    }
+                });
+            } else {
+                // Alapértelmezés szerint magyar
+                document.querySelectorAll('[data-lang-hu]').forEach(elem => {
+                    if (elem.tagName === 'INPUT' || elem.tagName === 'TEXTAREA') {
+                        elem.placeholder = elem.getAttribute('data-lang-hu');
+                    } else {
+                        elem.textContent = elem.getAttribute('data-lang-hu');
+                    }
+                });
+            }
+        }
+        
+        // Kezdeti nyelvi beállítás
+        handleLanguageChange();
+        
+        // Figyeljük a nyelvi váltást
+        const languageObserver = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'lang') {
+                    handleLanguageChange();
+                }
+            });
+        });
+        
+        languageObserver.observe(document.documentElement, { attributes: true });
+    });
+</script>
+{% endblock %}

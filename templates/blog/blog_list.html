@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% load static %}
+{# {% load i18n %} <- Ezt csak akkor használd, ha áttérsz a Django fordítási rendszerére #}
+
+{% block title %}
+    TUFA MACHINE - Blog
+{% endblock %}
+
+{% block content %}
+    {# Hero Szekció #}
+    <section class="hero-banner blog-hero">
+        {# Használhatsz alapértelmezett képet, ha nincs jobb #}
+        <img src="{% static 'images/blog/blog_hero.jpg' %}" alt="{% if LANGUAGE_CODE == 'sk' %}Blog TUFA MACHINE{% else %}TUFA MACHINE Blog{% endif %}" class="hero-image">
+        <div class="hero-text">
+            <h1>{% if LANGUAGE_CODE == 'sk' %}Tufa Blog{% else %}Tufa Blog{% endif %}</h1>
+
+        </div>
+    </section>
+
+    {# Blog Lista Szekció #}
+    <section class="blog-section">
+        <div class="container">
+            <div class="blog-container">
+                {% if posts %}
+                    <div class="blog-grid">
+                        {% for post in posts %}
+                            <div class="blog-card">
+                                <div class="blog-img-container">
+                                    {# Kiemelt kép vagy placeholder #}
+                                    {% if post.featured_image %}
+                                        <img src="{{ post.featured_image.url }}" alt="{% if LANGUAGE_CODE == 'sk' and post.title_sk %}{{ post.title_sk }}{% else %}{{ post.title_hu }}{% endif %}" class="blog-img">
+                                    {% elif post.video_url %}
+                                        {# Egyszerűbb placeholder videóhoz, a bonyolult thumbnail logika helyett #}
+                                        <img src="{% static 'images/blog/video_placeholder.jpg' %}" alt="{% if LANGUAGE_CODE == 'sk' and post.title_sk %}{{ post.title_sk }}{% else %}{{ post.title_hu }}{% endif %} - Videó" class="blog-img">
+                                        <div class="play-button"></div> {# CSS-ben definiált play ikon #}
+                                    {% else %}
+                                        <img src="{% static 'images/blog/placeholder.jpg' %}" alt="{% if LANGUAGE_CODE == 'sk' %}{{ post.title_sk|default:post.title_hu }}{% else %}{{ post.title_hu }}{% endif %}" class="blog-img">
+                                    {% endif %}
+
+                                    {# Kategória címke #}
+                                    {% if post.category %}
+                                        <span class="blog-category">
+                                            {% if LANGUAGE_CODE == 'sk' %}
+                                                {{ post.category.name_sk|default:post.category.name_hu }}
+                                            {% else %}
+                                                {{ post.category.name_hu }}
+                                            {% endif %}
+                                        </span>
+                                        {# Opcionális link a kategória oldalára:
+                                        <a href="#" class="blog-category"> ... </a>
+                                        #}
+                                    {% endif %}
+                                </div>
+                                <div class="blog-content">
+                                    <h2 class="blog-title">
+                                        <a href="{{ post.get_absolute_url }}">
+                                            {% if LANGUAGE_CODE == 'sk' %}
+                                                {{ post.title_sk|default:post.title_hu }}
+                                            {% else %}
+                                                {{ post.title_hu }}
+                                            {% endif %}
+                                        </a>
+                                    </h2>
+                                    <div class="blog-meta">
+                                        {# Dátum formázása (settings.py-ban beállítható) #}
+                                        <span class="blog-date">{{ post.published|date:"Y. F j." }}</span>
+                                    </div>
+                                    <div class="blog-excerpt">
+                                        {% if LANGUAGE_CODE == 'sk' %}
+                                            {% if post.excerpt_sk %}
+                                                {{ post.excerpt_sk|striptags|truncatewords_html:25 }}
+                                            {% elif post.content_sk %}
+                                                {{ post.content_sk|striptags|truncatewords_html:25 }}
+                                            {% else %} {# Fallback magyarra, ha szlovák nincs #}
+                                                {{ post.excerpt_hu|default:post.content_hu|striptags|truncatewords_html:25 }}
+                                            {% endif %}
+                                        {% else %}
+                                            {% if post.excerpt_hu %}
+                                                {{ post.excerpt_hu|striptags|truncatewords_html:25 }}
+                                            {% else %}
+                                                {{ post.content_hu|striptags|truncatewords_html:25 }}
+                                            {% endif %}
+                                        {% endif %}
+                                    </div>
+                                    <a href="{{ post.get_absolute_url }}" class="blog-read-more">
+                                        {% if LANGUAGE_CODE == 'sk' %}Čítať viac →{% else %}Tovább olvasom →{% endif %}
+                                    </a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    {# Lapozás #}
+                    {% if is_paginated %}
+                        <div class="pagination">
+                            {% if posts.has_previous %}
+                                <a href="?page={{ posts.previous_page_number }}" class="pagination-link">
+                                    {% if LANGUAGE_CODE == 'sk' %}« Predchádzajúca{% else %}« Előző{% endif %}
+                                </a>
+                            {% endif %}
+
+                            {% for i in posts.paginator.page_range %}
+                                {% if posts.number == i %}
+                                    <span class="pagination-link active">{{ i }}</span>
+                                {% else %}
+                                    <a href="?page={{ i }}" class="pagination-link">{{ i }}</a>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if posts.has_next %}
+                                <a href="?page={{ posts.next_page_number }}" class="pagination-link">
+                                    {% if LANGUAGE_CODE == 'sk' %}Ďalšia »{% else %}Következő »{% endif %}
+                                </a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+
+                {% else %}
+                    {# Ha nincsenek bejegyzések #}
+                    <div class="empty-blog">
+                        <p>
+                            {% if LANGUAGE_CODE == 'sk' %}
+                                Momentálne nie sú k dispozícii žiadne príspevky na blogu. Prosím, vráťte sa neskôr!
+                            {% else %}
+                                Jelenleg nincsenek elérhető blogbejegyzések. Kérjük, látogasson vissza később!
+                            {% endif %}
+                        </p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    {# Call to Action Szekció (mintafeladatból másolva, igény szerint módosítható) #}
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">
+                {% if LANGUAGE_CODE == 'sk' %}Máte otázky?{% else %}Kérdései vannak?{% endif %}
+            </h2>
+            <p class="cta-text">
+               {% if LANGUAGE_CODE == 'sk' %}
+                   Kontaktujte nás! Náš odborný tím je vám k dispozícii, aby našiel riešenie, ktoré vám najviac vyhovuje.
+               {% else %}
+                   Vegye fel velünk a kapcsolatot! Szakértő csapatunk készséggel áll rendelkezésére, hogy megtalálja az Önnek legmegfelelőbb megoldást.
+               {% endif %}
+            </p>
+            {# Használj 'url' taget a linkekhez, ha van dedikált kapcsolat oldalad #}
+            <a href="/kapcsolat/" class="btn btn-light">
+                {% if LANGUAGE_CODE == 'sk' %}Kontaktujte nás{% else %}Kapcsolatfelvétel{% endif %}
+            </a>
+        </div>
+    </section>
+{% endblock %}
