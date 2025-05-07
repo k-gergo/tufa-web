@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-e@dxe12_p@mr27(7ajm)ncgb@7exz7q5zeogh)_6uj8xi2m(^a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['tstdj.xyz', 'www.tstdj.xyz', '89.135.114.255', 'test.tufa.hu',
                  'localhost', '127.0.0.1', '192.168.0.209', '', 'tufa.hu', 'www.tufa.hu',
@@ -105,8 +105,8 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'tufa_db',
-            'USER': 'django_admin',
+            'NAME': 'c2test',
+            'USER': 'c2test',
             'PASSWORD': '4ahf!WWxtYW',
             'HOST': 'localhost',
             'PORT': '3306',
